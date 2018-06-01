@@ -376,3 +376,17 @@ body, html  {
   top:0%;
   height:100%;
 }
+.timeline-wrapper {
+  position:absolute;
+  left: 5%;
+  width: 90%;
+  top:80%;
+  height:15%;
+  z-index: 1;
+}
+.timeline {
+  position:absolute;
+  left: 0%;
+  width: 98%;
+  z-index: 1;
+}

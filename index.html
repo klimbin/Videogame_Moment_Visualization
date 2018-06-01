@@ -64,7 +64,6 @@
 						x = document.getElementById("myDropdown");
 						x.classList.toggle("show");
 						selected = this.textContent;
-						console.log(selected);
 						if (document.getElementById("invisible_checkbox").checked)
 						{
 							dimension = 3;
@@ -94,7 +93,7 @@
 			input = document.getElementById("myInput");
 			filter = input.value.toUpperCase();
 			div = document.getElementById("myDropdown");
-			a = div.getElementsByTagName("a");
+			a = div.getElementsByTagName("p");
 			for (i = 0; i < a.length; i++) {
 				if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
 					a[i].style.display = "";

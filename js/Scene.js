@@ -91,6 +91,7 @@ function initScene() {
   //////////////////////////////////////////////////chris's code
   window.addEventListener( 'keyup', myKeyUp, false );
   window.addEventListener( 'keydown', myKeyDown, false );
+  window.addEventListener('resize', resizeTimeline, false );
   ///////////////////////////////////////////////////////
 }
 
@@ -133,6 +134,8 @@ function loadingScene() {
   if ((g_actionCounter == g_expectedActions) && (!isPageShown))
   {
     addCorporaButtons();
+    addTimelineDivs();
+    createTimeline();
     cameraReady();
     showPage();
     isPageShown = true;

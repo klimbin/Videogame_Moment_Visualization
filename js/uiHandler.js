@@ -46,13 +46,14 @@ function onShowBookmarkBar(id){
   var isBkmkBtnClicked = $('#' + id).hasClass("button-clicked");
   if (isBkmkBtnClicked) {
     $('#bookmark-btn').switchClass('button-clicked', 'button','fast');
-    bookmarkManager.hideBookmarkLabels();
+    //bookmarkManager.hideBookmarkLabels();
     //Add time div
+    document.getElementById("timeline-wrapper").style.display = "none";
   } else {
     $('#bookmark-btn').switchClass('button', 'button-clicked','fast');
-    //Show bookmarks
-    bookmarkManager.showBookmarkLabels();
+    //bookmarkManager.showBookmarkLabels();
     //Hide time div
+    document.getElementById("timeline-wrapper").style.display = "block";
   }
 }
 function onShowCorpus(id){
@@ -133,7 +134,6 @@ function onPlay(id) {
     }
   }
 }
-
 function animation(startId, stopId) {
   autoRotate = false;
   for (var i = startId; i <= stopId; i++) {
@@ -141,5 +141,77 @@ function animation(startId, stopId) {
       labelManager.showNearbyLabels(i, 0);
       urlManager.updateURL(URLKeys.MOMENT, i);
     }
+  }
+}
+
+// var timelineData = [
+// {"value": 0, "name": "Start", radius: "7"},
+// {"value": 4500, "name": "End", radius: "7"}];
+var timelineData = {};
+function addTimelineDivs(){
+  //<div class = "timeline" id="timelineNonDate" style="display:none;"></div>
+  css_class = 'timeline';
+  timeline_number = Object.keys(spriteManager.spriteGroups).length;
+  div_height_pct = 100.0 /timeline_number;
+
+  var idx = 0;
+  for (corpus in spriteManager.spriteGroups){
+    var pct = idx * div_height_pct;
+    var id = "timeline-" + corpus;
+    $('#timeline-wrapper').prepend("<div id='" + id + "', class='" + css_class + "'></div>");
+    $('#' + id).css("position", "absolute");
+    $('#' + id).css("top", pct+"%");
+    $('#' + id).css("left", "0%");
+    $('#' + id).css("width", "100%");
+    $('#' + id).css("height", div_height_pct+"%");
+    idx++ ;
+  }
+}
+function createTimeline(){
+  timeline_width = $( '.timeline-wrapper' ).width();
+  for (corpus in spriteManager.spriteGroups) {
+    if (!timelineData.hasOwnProperty(corpus)){
+      var id = "#timeline-" + corpus;
+      var elem = $(id);
+      elem.html('');
+      start = 0;
+      stop = spriteManager.spriteGroups[corpus].children.length-1;
+      timelineData[corpus] = [{"value": start, "name": "Start", radius: "7"},
+      {"value": stop, "name": "End", radius: "7"}];
+      TimeKnots.draw(id, timelineData[corpus], {dateDimension:false, color: "#7575a3", width:timeline_width, height: '50', showLabels: true, labelFormat: "%Y",lineWidth:2});
+    }
+  }
+}
+function addTimeline(momentId){
+	console.log("added");
+  timeline_width = $( '.timeline-wrapper' ).width();
+  corpus = spriteManager.spriteDictionary[momentId].corpus;
+  momentIndex = spriteManager.spriteDictionary[momentId].momentIndex;
+  timelineData[corpus].push({"value": momentIndex, "name": spriteManager.spriteDictionary[momentId].game + " " + spriteManager.spriteDictionary[momentId].corpus, img: spriteManager.spriteDictionary[momentId].image,radius: "3"});
+  for (corpus in spriteManager.spriteGroups) {
+    var id = "#timeline-" + corpus;
+    var elem = $(id);
+    elem.html('');
+    //timelineData[corpus].push({"value": spriteManager.spriteDictionary[momentId].momentIndex, "name": spriteManager.spriteDictionary[momentId].game + " " + spriteManager.spriteDictionary[momentId].corpus, img: spriteManager.spriteDictionary[momentId].image,radius: "3"});
+  	var timeline = TimeKnots.draw(id, timelineData[corpus], {dateDimension:false, color: "#7575a3", width:timeline_width, height: '50', showLabels: true, labelFormat: "%Y",lineWidth:2});
+  }
+}
+
+function deleteTimeline(selectedObject){
+	console.log("deleted");
+	var momentId = Number(selectedObject.name);
+  var corpus = spriteManager.spriteDictionary[momentId].corpus;
+	var imglink = spriteManager.spriteDictionary[momentId].image;
+	timelineData[corpus] = timelineData[corpus].filter(function(object) {
+		return object.img !== imglink;
+	});
+  // var elem = $('#timelineNonDate');
+  // elem.html('');
+  timeline_width = $( '.timeline-wrapper' ).width();
+  for (corpus in spriteManager.spriteGroups) {
+    var id = "#timeline-" + corpus;
+    var elem = $(id);
+    elem.html('');
+	  var timeline = TimeKnots.draw(id, timelineData[corpus], {dateDimension:false, color: "#7575a3", width:timeline_width, height: '50', showLabels: true, labelFormat: "%Y",lineWidth:2});
   }
 }

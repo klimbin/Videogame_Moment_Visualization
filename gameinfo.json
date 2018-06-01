@@ -7,10 +7,6 @@
     "2": "./pic/The 7th Saga (USA)_2D.json",
     "3": "./pic/The 7th Saga (USA)_3D.json"
   },
-  "Super Metroid (Japan, USA)": {
-    "3": "./pic/Super Metroid_3D.json",
-    "2": "./pic/Super Metroid_2D.json"
-  },
   "Batman Returns (USA)": {
     "2": "./pic/Batman Returns (USA)_2D.json",
     "3": "./pic/Batman Returns (USA)_3D.json"
@@ -50,5 +46,9 @@
   "Super Bomberman 2 (USA)": {
     "2": "./pic/Super Bomberman 2 (USA)_2D.json",
     "3": "./pic/Super Bomberman 2 (USA)_3D.json"
+  },
+  "Super Metroid": {
+    "2": "./pic/Super Metroid_2D.json",
+    "3": "./pic/Super Metroid_3D.json"
   }
 }

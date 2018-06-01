@@ -11,6 +11,7 @@ function BookmarkManager() {
       this.bookmarksDict[momentId] = this.numberOfPages-1;
       this.bookmarkList[this.numberOfPages-1] = momentId;
     }
+    addTimeline(momentId);
   }
   this.getLastBookmark = function() {
     this.momentId = null;
