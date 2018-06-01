@@ -252,10 +252,10 @@ function updateRotation(){
 function resizeTimeline(){
   // var elem = $('#timelineNonDate');
   // elem.html('');
-  timeline_width = $( '.timeline-wrapper' ).width();
+  timeline_width = $( '.timeline-wrapper' ).width() * 0.9;
   console.log('timeline_width:' + timeline_width);
   for (tm in timelineData) {
-    var id = "#timeline-" + corpus;
+    var id = "#timeline-" + tm;
     var elem = $(id);
     elem.html('');
     var timeline = TimeKnots.draw(id, timelineData[tm], {dateDimension:false, color: "#7575a3", width:timeline_width, height: '50', showLabels: true, labelFormat: "%Y",lineWidth:2});

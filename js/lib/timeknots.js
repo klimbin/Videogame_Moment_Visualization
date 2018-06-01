@@ -26,7 +26,7 @@ var TimeKnots = {
     if(cfg.addNow != false){
       events.push({date: new Date(), name: cfg.addNowLabel || "Today"});
     }
-    var tip = d3.select(id)
+    var tip = d3.select('body')
     .append('div')
     .style("opacity", 0)
     .style("position", "absolute")
@@ -186,8 +186,8 @@ var TimeKnots = {
         tip.transition()
         .duration(100)
     .style("opacity", 0)})
-    .on("mouseup", function(){
-      console.log("timeline clicked!");
+    .on("mouseup", function(d){
+      console.log("timeline clicked!:" + d.name);
     });
 
     //Adding start and end labels
@@ -203,12 +203,12 @@ var TimeKnots = {
       }
       svg.append("text")
          .text(startString).style("font-size", "70%")
-         .attr("x", function(d){if(cfg.horizontalLayout){return d3.max([0, (margin-this.getBBox().width/2)])} return Math.floor(this.getBBox().width/2)})
+         .attr("x", function(d){if(cfg.horizontalLayout){return d3.max([0, (margin-this.getBBox().width)])} return Math.floor(this.getBBox().width)})
          .attr("y", function(d){if(cfg.horizontalLayout){return Math.floor(cfg.height/2+(margin+this.getBBox().height))}return margin+this.getBBox().height/2});
 
       svg.append("text")
          .text(endString).style("font-size", "70%")
-         .attr("x", function(d){if(cfg.horizontalLayout){return  cfg.width -  d3.max([this.getBBox().width, (margin+this.getBBox().width/2)])} return Math.floor(this.getBBox().width/2)})
+         .attr("x", function(d){if(cfg.horizontalLayout){return  cfg.width -  d3.max([this.getBBox().width, (margin+this.getBBox().width)])} return Math.floor(this.getBBox().width)})
          .attr("y", function(d){if(cfg.horizontalLayout){return Math.floor(cfg.height/2+(margin+this.getBBox().height))}return cfg.height-margin+this.getBBox().height/2})
     }
 

@@ -151,24 +151,33 @@ var timelineData = {};
 function addTimelineDivs(){
   //<div class = "timeline" id="timelineNonDate" style="display:none;"></div>
   css_class = 'timeline';
+  text_class = 'timeline-text';
   timeline_number = Object.keys(spriteManager.spriteGroups).length;
-  div_height_pct = 100.0 /timeline_number;
+  if (timeline_number == 1) {
+    div_height_pct = 50;
+  } else {
+    div_height_pct = 100.0 /timeline_number;
+  }
 
   var idx = 0;
   for (corpus in spriteManager.spriteGroups){
     var pct = idx * div_height_pct;
     var id = "timeline-" + corpus;
+    var text_id = id + "-textbox";
+    $('#timeline-wrapper').prepend("<div id='" + text_id + "', class='" + text_class + "'>" + corpus + "</div>");
+    $('#' + text_id).css("position", "absolute");
+    $('#' + text_id).css("bottom", pct+"%");
+    $('#' + text_id).css("height", div_height_pct+"%");
+
     $('#timeline-wrapper').prepend("<div id='" + id + "', class='" + css_class + "'></div>");
     $('#' + id).css("position", "absolute");
-    $('#' + id).css("top", pct+"%");
-    $('#' + id).css("left", "0%");
-    $('#' + id).css("width", "100%");
+    $('#' + id).css("bottom", pct+"%");
     $('#' + id).css("height", div_height_pct+"%");
     idx++ ;
   }
 }
 function createTimeline(){
-  timeline_width = $( '.timeline-wrapper' ).width();
+  timeline_width = $( '.timeline-wrapper' ).width()* 0.9;
   for (corpus in spriteManager.spriteGroups) {
     if (!timelineData.hasOwnProperty(corpus)){
       var id = "#timeline-" + corpus;
@@ -176,15 +185,18 @@ function createTimeline(){
       elem.html('');
       start = 0;
       stop = spriteManager.spriteGroups[corpus].children.length-1;
-      timelineData[corpus] = [{"value": start, "name": "Start", radius: "7"},
-      {"value": stop, "name": "End", radius: "7"}];
+      start_spriteId = Number(spriteManager.spriteGroups[corpus].children[start].name);
+      stop_spriteId = Number(spriteManager.spriteGroups[corpus].children[stop].name);
+
+      timelineData[corpus] = [{"value": start, "name": spriteManager.spriteDictionary[start_spriteId].game + " " + spriteManager.spriteDictionary[start_spriteId].corpus, img: spriteManager.spriteDictionary[start_spriteId].image, radius: "6"},
+      {"value": stop, "name": spriteManager.spriteDictionary[stop_spriteId].game + " " + spriteManager.spriteDictionary[stop_spriteId].corpus, img: spriteManager.spriteDictionary[stop_spriteId].image, radius: "6"}];
       TimeKnots.draw(id, timelineData[corpus], {dateDimension:false, color: "#7575a3", width:timeline_width, height: '50', showLabels: true, labelFormat: "%Y",lineWidth:2});
     }
   }
 }
 function addTimeline(momentId){
 	console.log("added");
-  timeline_width = $( '.timeline-wrapper' ).width();
+  timeline_width = $( '.timeline-wrapper' ).width()* 0.9;
   corpus = spriteManager.spriteDictionary[momentId].corpus;
   momentIndex = spriteManager.spriteDictionary[momentId].momentIndex;
   timelineData[corpus].push({"value": momentIndex, "name": spriteManager.spriteDictionary[momentId].game + " " + spriteManager.spriteDictionary[momentId].corpus, img: spriteManager.spriteDictionary[momentId].image,radius: "3"});
@@ -207,7 +219,7 @@ function deleteTimeline(selectedObject){
 	});
   // var elem = $('#timelineNonDate');
   // elem.html('');
-  timeline_width = $( '.timeline-wrapper' ).width();
+  timeline_width = $( '.timeline-wrapper' ).width() * 0.9;
   for (corpus in spriteManager.spriteGroups) {
     var id = "#timeline-" + corpus;
     var elem = $(id);
