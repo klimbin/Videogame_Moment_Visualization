@@ -253,7 +253,6 @@ function resizeTimeline(){
   // var elem = $('#timelineNonDate');
   // elem.html('');
   timeline_width = $( '.timeline-wrapper' ).width() * 0.9;
-  console.log('timeline_width:' + timeline_width);
   for (tm in timelineData) {
     var id = "#timeline-" + tm;
     var elem = $(id);

@@ -187,7 +187,8 @@ var TimeKnots = {
         .duration(100)
     .style("opacity", 0)})
     .on("mouseup", function(d){
-      console.log("timeline clicked!:" + d.name);
+      console.log("timeline clicked!:" + d.momentId);
+      bookmarkManager.showBookmark( Number(d.momentId));
     });
 
     //Adding start and end labels

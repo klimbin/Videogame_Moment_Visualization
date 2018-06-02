@@ -188,18 +188,17 @@ function createTimeline(){
       start_spriteId = Number(spriteManager.spriteGroups[corpus].children[start].name);
       stop_spriteId = Number(spriteManager.spriteGroups[corpus].children[stop].name);
 
-      timelineData[corpus] = [{"value": start, "name": spriteManager.spriteDictionary[start_spriteId].game + " " + spriteManager.spriteDictionary[start_spriteId].corpus, img: spriteManager.spriteDictionary[start_spriteId].image, radius: "6"},
-      {"value": stop, "name": spriteManager.spriteDictionary[stop_spriteId].game + " " + spriteManager.spriteDictionary[stop_spriteId].corpus, img: spriteManager.spriteDictionary[stop_spriteId].image, radius: "6"}];
+      timelineData[corpus] = [{"value": start, "name": spriteManager.spriteDictionary[start_spriteId].game + " " + spriteManager.spriteDictionary[start_spriteId].corpus, img: spriteManager.spriteDictionary[start_spriteId].image, radius: "6", momentId: start_spriteId},
+      {"value": stop, "name": spriteManager.spriteDictionary[stop_spriteId].game + " " + spriteManager.spriteDictionary[stop_spriteId].corpus, img: spriteManager.spriteDictionary[stop_spriteId].image, radius: "6", momentId: stop_spriteId}];
       TimeKnots.draw(id, timelineData[corpus], {dateDimension:false, color: "#7575a3", width:timeline_width, height: '50', showLabels: true, labelFormat: "%Y",lineWidth:2});
     }
   }
 }
 function addTimeline(momentId){
-	console.log("added");
   timeline_width = $( '.timeline-wrapper' ).width()* 0.9;
   corpus = spriteManager.spriteDictionary[momentId].corpus;
   momentIndex = spriteManager.spriteDictionary[momentId].momentIndex;
-  timelineData[corpus].push({"value": momentIndex, "name": spriteManager.spriteDictionary[momentId].game + " " + spriteManager.spriteDictionary[momentId].corpus, img: spriteManager.spriteDictionary[momentId].image,radius: "3"});
+  timelineData[corpus].push({"value": momentIndex, "name": spriteManager.spriteDictionary[momentId].game + " " + spriteManager.spriteDictionary[momentId].corpus, img: spriteManager.spriteDictionary[momentId].image,radius: "3", momentId: momentId});
   for (corpus in spriteManager.spriteGroups) {
     var id = "#timeline-" + corpus;
     var elem = $(id);

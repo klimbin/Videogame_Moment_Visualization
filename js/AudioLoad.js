@@ -14,7 +14,7 @@ var AudioManager = function () {
       self.Music.setBuffer( buffer );
       self.Music.setLoop( true );
       self.Music.setVolume( 0.3 );
-      self.Music.play();//backgroundmusic
+      //self.Music.play();//backgroundmusic
       g_actionCounter += 1;
     });
     g_expectedActions += 1;

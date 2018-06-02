@@ -3,13 +3,15 @@ function BookmarkManager() {
   this.bookmarksDict={};
   this.numberOfPages=0;
   this.currentPage=0;
+  this.comments = {};
 
-  this.addBookmark = function(momentId) {
+  this.addBookmark = function(momentId, comments=null) {
     if (!this.bookmarksDict.hasOwnProperty(momentId)){
       this.numberOfPages += 1;
       this.currentPage = this.numberOfPages - 1;
       this.bookmarksDict[momentId] = this.numberOfPages-1;
       this.bookmarkList[this.numberOfPages-1] = momentId;
+      this.comments[momentId] = comments;
     }
     addTimeline(momentId);
   }
@@ -37,6 +39,10 @@ function BookmarkManager() {
       this.momentId = this.bookmarkList[this.currentPage];
     }
     return this.momentId;
+  }
+  this.showBookmark = function(momentId) {
+    g_currentTarget = Number(momentId);
+    labelManager.showNearbyLabels(g_currentTarget, 0, true);
   }
   this.showBookmarkLabels = function() {
     if (this.bookmarkList.length == 0){
