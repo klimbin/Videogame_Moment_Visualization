@@ -158,9 +158,11 @@ function cameraReady() {
     urlManager.updateURL(URLKeys.MOMENT, inputMomentId);
   }
   if (URLKeys.BOOKMARK in urlParams && urlParams[URLKeys.BOOKMARK] != "null") {
-    var bmlist = urlParams[URLKeys.BOOKMARK];
-    for (var i=0; i<bmlist.length;i++){
-      bookmarkManager.addBookmark(bmlist[i]);
+    console.log(urlParams[URLKeys.BOOKMARK]);
+    var bmjson = JSON.parse(decodeURI(urlParams[URLKeys.BOOKMARK]));
+
+    for (var key in bmjson) {
+      bookmarkManager.addBookmark(key, bmjson[key]);
     }
   }
 }

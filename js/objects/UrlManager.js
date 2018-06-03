@@ -33,11 +33,7 @@ function UrlManager() {
       stringParams[URLKeys.POSITION] = params[URLKeys.POSITION].join(',');
     };
     if (URLKeys.BOOKMARK in params) {
-      if (params[URLKeys.BOOKMARK].length > 1) {
-        stringParams[URLKeys.BOOKMARK] = params[URLKeys.BOOKMARK].join(',');
-      } else {
-        stringParams[URLKeys.BOOKMARK] = params[URLKeys.BOOKMARK];
-      }
+      stringParams[URLKeys.BOOKMARK] = params[URLKeys.BOOKMARK];
     };
     for (key in stringParams) {
       urlString += key + "=" + stringParams[key] + ';'
@@ -77,7 +73,8 @@ function UrlManager() {
       this.urlParams[URLKeys.MOMENT] = value;
     }
     if (key == URLKeys.BOOKMARK) {
-      this.urlParams[URLKeys.BOOKMARK] = value;
+      var str = JSON.stringify(value);
+      this.urlParams[URLKeys.BOOKMARK] = encodeURI(str);
     }
     var urlString = this._getUrlString(this.urlParams);
     this._writeURL(urlString);

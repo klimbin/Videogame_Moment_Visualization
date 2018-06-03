@@ -61,6 +61,11 @@ function BookmarkManager() {
     }
   }
   this.getBookmarks = function() {
-    return this.bookmarkList;
+    // not best approach
+    var bookmark_json = {};
+    for (var key in this.bookmarksDict) {
+      bookmark_json[key] = this.comments[key];
+    }
+    return bookmark_json;
   }
 }
