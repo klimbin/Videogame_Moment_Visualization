@@ -19,6 +19,7 @@ var BookmarkInput = function() {
   this.init();
 
   this.showDialog = function(callbackFunction, objName, comment) {
+    g_dialogVisible = true;
     this.dialogDiv.style.display = "block";
 
     if (comment != undefined && comment.length > 0) {
@@ -38,6 +39,27 @@ var BookmarkInput = function() {
 
     this.callbackFunc(this.callbackArgs, comment);
     g_dialogVisible = false;
+  }
+
+  this.dialogCancelled = function() {
+    this.dialogDiv.style.display = "none";
+    g_dialogVisible = false;
+  }
+}
+
+var HelpDialog = function() {
+  var self = this;
+  this.dialogDiv = null;
+
+  this.init = function() {
+    this.dialogDiv = document.getElementById('helpDialogDiv');
+  }
+
+  this.init();
+
+  this.showDialog = function() {
+    g_dialogVisible = true;
+    this.dialogDiv.style.display = "block";
   }
 
   this.dialogCancelled = function() {

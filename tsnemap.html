@@ -22,20 +22,26 @@
 		</div>
 		<div id="container"></div>
 		<div class="top-bar" id="top_bar" style="display:none">
-			<div class="corpora-btn-wrapper">
+			<div class="top-btn-wrapper corpora-btn-wrapper">
 				<button class="button" id="corpora-btn" onclick="onShowCorporaBar(this.id)">Corpora</button>
 			</div>
-			<div class="bookmark-btn-wrapper">
+			<div class="top-btn-wrapper bookmark-btn-wrapper">
 				<button class="button" id="bookmark-btn" onclick="onShowBookmarkBar(this.id)">Bookmark</button>
 			</div>
-			<div class="animation-btn-wrapper">
+			<div class="top-btn-wrapper animation-btn-wrapper">
 				<button class="button" id="animation-btn" onclick="onShowAnimationBar(this.id)">Animation</button>
 			</div>
-			<div class="search-container">
+			<div class="top-btn-wrapper search-container">
 				<div class="search-wrapper">
 					<input type="text" placeholder="Search By Id..." id="moment_id" name="search">
 					<button type="submit" class="search-btn" id="moment_button" onclick="onMomentInput()"><i class="fa fa-search"></i></button>
 				</div>
+			</div>
+			<div class="top-btn-wrapper help-button-wrapper">
+				<button class="button" id="help-btn" onclick="onShowHelp()"><b>?</b></button>
+			</div>
+			<div class="top-btn-wrapper exit-button-wrapper">
+				<button class="button" id="exit-btn" onclick="onNavigateToIndex()"><b>X</b></button>
 			</div>
 			<!--div class="question-container">
 					<div style="position: absolute; height: 100%; vertical-align: middle;">
@@ -60,13 +66,31 @@
 			<p id="game-info"></p>
 		</div>
 		<div id='bookmarkInputDiv' style='display:none'>
-			<div class="dialog-wrapper">
+			<div class="dialog-wrapper bottom_dialog">
 				Please enter comment for the bookmark:<br />
 				<input type='text' class='roundInput' id='bookmarkComment'><br />
 				<table class='dialog_button_table'><tr><td>
 				<button id="bookmark_commit" class="dialog_button" onclick="bookmarkDialog.dialogReturned()">Bookmark</button>
 				</td><td>
 				<button class="dialog_button" onclick="bookmarkDialog.dialogCancelled()">Cancel</button>
+				</td></tr></table>
+			</div>
+		</div>
+		<div id='helpDialogDiv' style='display:none'>
+			<div class="dialog-wrapper full_page_dialog">
+				<table class='dialog_button_table dialog_wide_table'><tr style="height:90%; text-align: left"><td>
+<h3>Navigation and controls:</h3>
+<ul>
+	<li>Mouse scroll to zoom in or zoom out</li>
+	<li>Mouse drag to rotate viewing angle</li>
+	<li>Mouse click to select/deselect a moment, once selected:</li>
+		<ul>
+			<li>Key , and . to navigate previous or next moment of the selected moment</li>
+			<li>Key b to bookmark the current moment</li>
+		</ul>
+</ul>
+				</td></tr><tr><td>
+				<button class="dialog_button" onclick="helpDialog.dialogCancelled()">Close</button>
 				</td></tr></table>
 			</div>
 		</div>

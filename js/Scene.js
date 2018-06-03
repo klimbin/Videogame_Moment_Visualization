@@ -22,6 +22,7 @@ var urlManager = new UrlManager();
 var audioManager = new AudioManager();
 var eventQueue = new EventQueue();
 var bookmarkDialog = new BookmarkInput();
+var helpDialog = new HelpDialog();
 ///////////////////Chris's variables////////////////////////////////////////////
 var moveFoward = false;
 var moveBackward = false;

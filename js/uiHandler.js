@@ -62,7 +62,7 @@ function onShowBookmarkBar(id){
 }
 function onShowCorpus(id){
   if (g_dialogVisible) { return; }
-  
+
   var group = id.substr(0, id.lastIndexOf("-btn"));
   var isCorpusBtnClicked = $('#' + id).hasClass("button-sm-clicked");
   if ( isCorpusBtnClicked ) {
@@ -127,6 +127,8 @@ function dragElement(elmnt) {
 }
 
 function onPlay(id) {
+  if (g_dialogVisible) { return; }
+  
   if (id == "playpause-btn") {
     startId = Number(document.getElementById('startId').value);
     stopId = Number(document.getElementById('stopId').value);
@@ -233,4 +235,13 @@ function deleteTimeline(selectedObject){
     elem.html('');
 	  var timeline = TimeKnots.draw(id, timelineData[corpus], {dateDimension:false, color: "#7575a3", width:timeline_width, height: '50', showLabels: true, labelFormat: "%Y",lineWidth:2});
   }
+}
+
+function onShowHelp() {
+  g_dialogVisible = true;
+  helpDialog.showDialog();
+}
+
+function onNavigateToIndex() {
+  window.location.href = './index.html';
 }
