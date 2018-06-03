@@ -31,6 +31,8 @@ function addCorporaButtons(){
   }
 }
 function onShowCorporaBar(id) {
+  if (g_dialogVisible) { return; }
+
   var isClicked = $('#' + id).hasClass("button-clicked");
   if (isClicked) {
     //document.getElementById("float_div").style.display = "none";
@@ -43,6 +45,8 @@ function onShowCorporaBar(id) {
   }
 }
 function onShowBookmarkBar(id){
+  if (g_dialogVisible) { return; }
+
   var isBkmkBtnClicked = $('#' + id).hasClass("button-clicked");
   if (isBkmkBtnClicked) {
     $('#bookmark-btn').switchClass('button-clicked', 'button','fast');
@@ -57,6 +61,8 @@ function onShowBookmarkBar(id){
   }
 }
 function onShowCorpus(id){
+  if (g_dialogVisible) { return; }
+  
   var group = id.substr(0, id.lastIndexOf("-btn"));
   var isCorpusBtnClicked = $('#' + id).hasClass("button-sm-clicked");
   if ( isCorpusBtnClicked ) {
@@ -72,6 +78,8 @@ function onShowCorpus(id){
   }
 }
 function onShowAnimationBar(id) {
+  if (g_dialogVisible) { return; }
+
   var isAnimationBtnClicked = $('#' + id).hasClass("button-clicked");
   if ( isAnimationBtnClicked ) {
     $('#' + id).switchClass('button-clicked', 'button','fast');

@@ -187,6 +187,8 @@ var TimeKnots = {
         .duration(100)
     .style("opacity", 0)})
     .on("mouseup", function(d){
+      if (g_dialogVisible) { return; }
+      
       console.log("timeline clicked!:" + d.momentId);
       bookmarkManager.showBookmark( Number(d.momentId));
     });

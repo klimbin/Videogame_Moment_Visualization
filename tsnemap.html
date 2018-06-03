@@ -59,6 +59,17 @@
 		<div id="bottomright-bar" style="display:none;">
 			<p id="game-info"></p>
 		</div>
+		<div id='bookmarkInputDiv' style='display:none'>
+			<div class="dialog-wrapper">
+				Please enter comment for the bookmark:<br />
+				<input type='text' class='roundInput' id='bookmarkComment'><br />
+				<table class='dialog_button_table'><tr><td>
+				<button id="bookmark_commit" class="dialog_button" onclick="bookmarkDialog.dialogReturned()">Bookmark</button>
+				</td><td>
+				<button class="dialog_button" onclick="bookmarkDialog.dialogCancelled()">Cancel</button>
+				</td></tr></table>
+			</div>
+		</div>
 		<div class = "timeline-wrapper" id="timeline-wrapper" style="display:none"></div>
 		<script src="https://code.jquery.com/jquery-3.3.1.js"
 		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -84,6 +95,7 @@
 		<script src="js/objects/CameraManager.js"></script>
 		<script src="js/objects/UrlManager.js"></script>
 		<script src="js/objects/BookmarkManager.js"></script>
+		<script src="js/objects/Dialogs.js"></script>
 		<script src="js/EventHandler.js"></script>
 		<script src="js/uiHandler.js"></script>
 		<script src="js/EventQueue.js"></script>

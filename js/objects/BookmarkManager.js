@@ -6,7 +6,8 @@ function BookmarkManager() {
   this.comments = {};
 
   this.addBookmark = function(momentId, comments=null) {
-    if (!this.bookmarksDict.hasOwnProperty(momentId)){
+    if (!this.bookmarksDict.hasOwnProperty(momentId) ||
+        this.comments[momentId] != comments) {  // or if modifying comments
       this.numberOfPages += 1;
       this.currentPage = this.numberOfPages - 1;
       this.bookmarksDict[momentId] = this.numberOfPages-1;
@@ -43,6 +44,7 @@ function BookmarkManager() {
   this.showBookmark = function(momentId) {
     g_currentTarget = Number(momentId);
     labelManager.showNearbyLabels(g_currentTarget, 0, true);
+    g_lastSelected.object = spriteManager.spriteDictionary[g_currentTarget].object;
   }
   this.showBookmarkLabels = function() {
     if (this.bookmarkList.length == 0){

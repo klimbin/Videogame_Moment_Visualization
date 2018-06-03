@@ -14,11 +14,13 @@ input.addEventListener("keyup", function(event) {
 });
 
 function onMouseDown(event) {
+  if (g_dialogVisible) { return; }
   //event.preventDefault();
   lastClickedTime = performance.now();
   document.getElementById("moment_id").blur();
 }
 function onMouseUp(event) {
+  if (g_dialogVisible) { return; }
   //event.preventDefault();
   if (!g_isFlying) {
     //if it's a drag, do nothing;
@@ -60,6 +62,7 @@ function onMouseUp(event) {
 }
 
 function onMouseMove(event) {
+  if (g_dialogVisible) { return; }
   //event.preventDefault();
   // update the mouse position
   mouse.x = ( event.clientX / window.innerWidth ) * 2.0 - 1.0;
@@ -114,12 +117,15 @@ function resetLines(){
   }
 }
 function resetBookmakrs() {
+  if (g_dialogVisible) { return; }
+
   for (bookmark in bookmarkList) {
 
   }
 }
 
 function onKeydown(event){
+  if (g_dialogVisible) { return; }
   // should check if selected item is part of some object
   if (g_lastSelected.object != null && (event.key == '.' || event.key == '>')){
     if (g_currentTarget >= Object.keys(spriteManager.spriteDictionary).length - 1)
@@ -150,10 +156,11 @@ function onKeydown(event){
   }
 }
 function onKeyup(event){
-
+  if (g_dialogVisible) { return; }
 }
 
 function onMomentInput(event) {
+  if (g_dialogVisible) { return; }
   //Equivalent to clicking on a moment sprite
   var inputMomentId = document.getElementById("moment_id");
   inputMomentId.blur();
@@ -170,13 +177,30 @@ function onMomentInput(event) {
 
 //Save a new bookmark
 function onBookmarking(event) {
-  if (g_lastSelected.object != null && (event.key == 'b')){
-    bookmarkManager.addBookmark(Number(g_lastSelected.object.name));
-    urlManager.updateURL(URLKeys.BOOKMARK, bookmarkManager.getBookmarks());
+  if (g_dialogVisible) { return; }
+
+  if (g_lastSelected.object != null && (event.key == 'b' || event.key == 'B')){
+    // display dialog
+    g_dialogVisible = true;
+
+    var objNameVal = Number(g_lastSelected.object.name);
+    var objComment = null;
+    if (bookmarkManager.comments.hasOwnProperty(objNameVal)) {
+        objComment = bookmarkManager.comments[objNameVal];
+    }
+
+    bookmarkDialog.showDialog(function(objName, comment) {
+      bookmarkManager.addBookmark(objName, comment);
+      urlManager.updateURL(URLKeys.BOOKMARK, bookmarkManager.getBookmarks());
+    },
+    objNameVal,
+    objComment);
   }
 }
 //Retrieve moment by bookmark
 function onReadBookmark(event) {
+  if (g_dialogVisible) { return; }
+
   if (event.key == '_' || event.key == '-' ){
     var momentId = bookmarkManager.getLastBookmark();
   }
@@ -195,6 +219,8 @@ function onReadBookmark(event) {
 
 //////////////////////////////////////////////Chris's code
 function myKeyDown(event){
+  if (g_dialogVisible) { return; }
+
 	event = event || window.event;
 	switch(event.keyCode){
 		case 87:
@@ -220,6 +246,8 @@ function myKeyDown(event){
 };
 
 function myKeyUp (event){
+  if (g_dialogVisible) { return; }
+
   event = event || window.event;
 		switch(event.keyCode){
 		case 87:

@@ -10,6 +10,7 @@ var g_currentTarget = null; // ID of current focused object
 var g_actionCounter = 0;
 var g_expectedActions = 0;
 var g_autoRotate = true;
+var g_dialogVisible = false;
 ////////////////////Objects/////////////////////////////////////////////////////
 var animator = null;
 var bookmarkManager = new BookmarkManager();
@@ -20,6 +21,7 @@ var cameraManager = new CameraManager();
 var urlManager = new UrlManager();
 var audioManager = new AudioManager();
 var eventQueue = new EventQueue();
+var bookmarkDialog = new BookmarkInput();
 ///////////////////Chris's variables////////////////////////////////////////////
 var moveFoward = false;
 var moveBackward = false;
