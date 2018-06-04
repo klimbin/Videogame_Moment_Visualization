@@ -164,7 +164,11 @@ var TimeKnots = {
       }else{
         var format = function(d){return d}; // TODO
         var datetime = d.value;
-        var dateValue = d.name +" <small>("+d.value+")</small>";
+        var comments = "";
+        if (d.comments != undefined) {
+          comments = d.comments;
+        }
+        var dateValue = d.name +" ("+d.value+"): " + comments ;
       }
       d3.select(this)
       .style("fill", function(d){if(d.color != undefined){return d.color} return cfg.color}).transition()
@@ -188,7 +192,7 @@ var TimeKnots = {
     .style("opacity", 0)})
     .on("mouseup", function(d){
       if (g_dialogVisible) { return; }
-      
+
       console.log("timeline clicked!:" + d.momentId);
       bookmarkManager.showBookmark( Number(d.momentId));
     });

@@ -23,13 +23,13 @@
 		<div id="container"></div>
 		<div class="top-bar" id="top_bar" style="display:none">
 			<div class="top-btn-wrapper corpora-btn-wrapper">
-				<button class="button" id="corpora-btn" onclick="onShowCorporaBar(this.id)">Corpora</button>
+				<button class="button" id="corpora-btn"  title="Toggle on/off Corpora" onclick="onShowCorporaBar(this.id)">Corpora</button>
 			</div>
 			<div class="top-btn-wrapper bookmark-btn-wrapper">
-				<button class="button" id="bookmark-btn" onclick="onShowBookmarkBar(this.id)">Bookmark</button>
+				<button class="button" id="bookmark-btn" title="Show bookmarks" onclick="onShowBookmarkBar(this.id)">Bookmark</button>
 			</div>
 			<div class="top-btn-wrapper animation-btn-wrapper">
-				<button class="button" id="animation-btn" onclick="onShowAnimationBar(this.id)">Animation</button>
+				<button class="button" id="animation-btn" title="Show animations" onclick="onShowAnimationBar(this.id)">Animation</button>
 			</div>
 			<div class="top-btn-wrapper search-container">
 				<div class="search-wrapper">
@@ -38,10 +38,10 @@
 				</div>
 			</div>
 			<div class="top-btn-wrapper help-button-wrapper">
-				<button class="button" id="help-btn" onclick="onShowHelp()"><b>?</b></button>
+				<button class="button" id="help-btn" title="Help" onclick="onShowHelp()"><b>?</b></button>
 			</div>
 			<div class="top-btn-wrapper exit-button-wrapper">
-				<button class="button" id="exit-btn" onclick="onNavigateToIndex()"><b>X</b></button>
+				<button class="button" id="exit-btn" title="Go back to the main page" onclick="onNavigateToIndex()"><b>X</b></button>
 			</div>
 			<!--div class="question-container">
 					<div style="position: absolute; height: 100%; vertical-align: middle;">
@@ -66,31 +66,38 @@
 			<p id="game-info"></p>
 		</div>
 		<div id='bookmarkInputDiv' style='display:none'>
-			<div class="dialog-wrapper bottom_dialog">
-				Please enter comment for the bookmark:<br />
+			<div class="dialog-wrapper bottom-dialog">
+				Please enter comment for the bookmark (optional):<br />
 				<input type='text' class='roundInput' id='bookmarkComment'><br />
-				<table class='dialog_button_table'><tr><td>
-				<button id="bookmark_commit" class="dialog_button" onclick="bookmarkDialog.dialogReturned()">Bookmark</button>
+				<table class='dialog-button-table'><tr><td>
+				<button id="bookmark-commit" class="dialog-button" onclick="bookmarkDialog.dialogReturned()">Bookmark</button>
 				</td><td>
-				<button class="dialog_button" onclick="bookmarkDialog.dialogCancelled()">Cancel</button>
+				<button class="dialog-button" onclick="bookmarkDialog.dialogCancelled()">Cancel</button>
 				</td></tr></table>
 			</div>
 		</div>
 		<div id='helpDialogDiv' style='display:none'>
-			<div class="dialog-wrapper full_page_dialog">
-				<table class='dialog_button_table dialog_wide_table'><tr style="height:90%; text-align: left"><td>
-<h3>Navigation and controls:</h3>
+			<div class="dialog-wrapper full-page-dialog">
+				<table class='dialog-button-table dialog-wide-table'><tr style="height:90%; text-align: left"><td>
+<h3>Navigation</h3>
 <ul>
 	<li>Mouse scroll to zoom in or zoom out</li>
-	<li>Mouse drag to rotate viewing angle</li>
-	<li>Mouse click to select/deselect a moment, once selected:</li>
+	<li>Mouse drag to rotate</li>
+	<li>Press key w, s to move forward or backward</li>
+	<li>Press key a, d to move the camera to the left or right</li>
+</ul>
+<h3>Controls</h3>
+<ul>
+	<li>Mouse click to select a moment, once selected:</li>
 		<ul>
-			<li>Key , and . to navigate previous or next moment of the selected moment</li>
-			<li>Key b to bookmark the current moment</li>
+			<li>Press key , and . to jump to the previous or next moment</li>
+			<li>Press Key b to bookmark the current moment</li>
 		</ul>
+	<li>Press key - and = to jump to the previous or next bookmark</li>
+	<li>Use global ID to search for a specific moment</li>
 </ul>
 				</td></tr><tr><td>
-				<button class="dialog_button" onclick="helpDialog.dialogCancelled()">Close</button>
+				<button class="dialog-button" onclick="helpDialog.dialogCancelled()">Close</button>
 				</td></tr></table>
 			</div>
 		</div>

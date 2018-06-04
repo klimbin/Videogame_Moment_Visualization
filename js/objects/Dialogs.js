@@ -11,7 +11,7 @@ var BookmarkInput = function() {
     this.commentInput.addEventListener("keyup", function(event) {
       event.preventDefault();
       if (event.keyCode === 13) {
-          document.getElementById("bookmark_commit").click();
+          document.getElementById("bookmark-commit").click();
       }
     });
   }

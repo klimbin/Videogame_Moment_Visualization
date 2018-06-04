@@ -128,7 +128,7 @@ function dragElement(elmnt) {
 
 function onPlay(id) {
   if (g_dialogVisible) { return; }
-  
+
   if (id == "playpause-btn") {
     startId = Number(document.getElementById('startId').value);
     stopId = Number(document.getElementById('stopId').value);
@@ -204,17 +204,25 @@ function createTimeline(){
     }
   }
 }
-function addTimeline(momentId){
+function addTimeline(momentId, comments=null){
   timeline_width = $( '.timeline-wrapper' ).width()* 0.9;
   corpus = spriteManager.spriteDictionary[momentId].corpus;
   momentIndex = spriteManager.spriteDictionary[momentId].momentIndex;
-  timelineData[corpus].push({"value": momentIndex, "name": spriteManager.spriteDictionary[momentId].game + " " + spriteManager.spriteDictionary[momentId].corpus, img: spriteManager.spriteDictionary[momentId].image,radius: "3", momentId: momentId});
+  description = spriteManager.spriteDictionary[momentId].game + " " + spriteManager.spriteDictionary[momentId].corpus;
+  if (momentIndex == 0 || momentIndex == (spriteManager.spriteGroups[corpus].children.length-1)) {
+    for (var i =0; i < timelineData[corpus].length; i++){
+      if (timelineData[corpus][i]["value"] == momentIndex) {
+        timelineData[corpus][i]["comments"] = comments; //Only change comments
+      }
+    }
+  } else {
+    timelineData[corpus].push({"value": momentIndex, "name": description, "comments": comments, img: spriteManager.spriteDictionary[momentId].image,radius: "3", momentId: momentId});
+  }
   for (corpus in spriteManager.spriteGroups) {
     var id = "#timeline-" + corpus;
     var elem = $(id);
     elem.html('');
-    //timelineData[corpus].push({"value": spriteManager.spriteDictionary[momentId].momentIndex, "name": spriteManager.spriteDictionary[momentId].game + " " + spriteManager.spriteDictionary[momentId].corpus, img: spriteManager.spriteDictionary[momentId].image,radius: "3"});
-  	var timeline = TimeKnots.draw(id, timelineData[corpus], {dateDimension:false, color: "#7575a3", width:timeline_width, height: '50', showLabels: true, labelFormat: "%Y",lineWidth:2});
+    var timeline = TimeKnots.draw(id, timelineData[corpus], {dateDimension:false, color: "#7575a3", width:timeline_width, height: '50', showLabels: true, labelFormat: "%Y",lineWidth:2});
   }
 }
 

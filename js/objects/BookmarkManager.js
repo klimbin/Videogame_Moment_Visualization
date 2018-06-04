@@ -14,7 +14,7 @@ function BookmarkManager() {
       this.bookmarkList[this.numberOfPages-1] = momentId;
       this.comments[momentId] = comments;
     }
-    addTimeline(momentId);
+    addTimeline(momentId,comments);
   }
   this.getLastBookmark = function() {
     this.momentId = null;
@@ -61,7 +61,6 @@ function BookmarkManager() {
     }
   }
   this.getBookmarks = function() {
-    // not best approach
     var bookmark_json = {};
     for (var key in this.bookmarksDict) {
       bookmark_json[key] = this.comments[key];
