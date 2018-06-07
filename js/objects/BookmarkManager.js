@@ -45,6 +45,7 @@ function BookmarkManager() {
     g_currentTarget = Number(momentId);
     g_autoRotate = false;
     labelManager.showNearbyLabels(g_currentTarget, 0, true);
+    urlManager.updateURL(URLKeys.MOMENT, g_currentTarget);
     g_lastSelected.object = spriteManager.spriteDictionary[g_currentTarget].object;
   }
   this.showBookmarkLabels = function() {
