@@ -87,6 +87,7 @@ function SpriteManager() {
 
   var callbackLoadSprite = function(data) {
     var jsonData = JSON.parse(data);
+    dataManager.updateJSONData(jsonData);
     var numberBase = {val: 0};
     //corpora iteration
     for (var corpusName in jsonData.corpus) {

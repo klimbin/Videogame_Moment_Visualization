@@ -11,6 +11,7 @@ var g_actionCounter = 0;
 var g_expectedActions = 0;
 var g_autoRotate = true;
 var g_dialogVisible = false;
+var g_game = null;
 ////////////////////Objects/////////////////////////////////////////////////////
 var animator = null;
 var bookmarkManager = new BookmarkManager();
@@ -23,6 +24,8 @@ var audioManager = new AudioManager();
 var eventQueue = new EventQueue();
 var bookmarkDialog = new BookmarkInput();
 var helpDialog = new HelpDialog();
+var videoManager = new VideoManager();
+var dataManager = new DataManager();
 ///////////////////Chris's variables////////////////////////////////////////////
 var moveFoward = false;
 var moveBackward = false;
@@ -94,7 +97,10 @@ function initScene() {
   //////////////////////////////////////////////////chris's code
   window.addEventListener( 'keyup', myKeyUp, false );
   window.addEventListener( 'keydown', myKeyDown, false );
+  window.addEventListener( 'keydown', onTimeline, false );
   window.addEventListener('resize', resizeTimeline, false );
+  window.addEventListener('resize', resizeVideoDiv, false );
+
   ///////////////////////////////////////////////////////
 }
 
@@ -102,8 +108,9 @@ function animate() {
   loadingScene();
   requestAnimationFrame( animate );
   render();
-  eventQueue.update();
+  videoManager.update();  // check for stopping time
   TWEEN.update();
+  // eventQueue.update();
   // var delta = clock.getDelta();
   // if (animator != null) {
   //   animator.update(1000 * delta);
@@ -126,9 +133,10 @@ function animate() {
   if(moveFoward || moveBackward) velocity.z -= direction.z * 400.0 * delta;
   camera.translateZ( velocity.z * delta );//for moving forward and backward
   turning();
-  //////////////////////////////////////////////////////////////////////////////
   prevTime = now;
+  //set target
   camera.updateProjectionMatrix();
+  //////////////////////////////////////////////////////////////////////////////
 }
 function render() {
   renderer.render( scene, camera );
@@ -140,6 +148,7 @@ function loadingScene() {
     addTimelineDivs();
     createTimeline();
     cameraReady();
+    videoManager.init(dataManager.jsonData.video.source, dataManager.jsonData.video.fps, dataManager.jsonData.video.total);
     showPage();
     isPageShown = true;
   }
@@ -159,9 +168,8 @@ function cameraReady() {
     urlManager.updateURL(URLKeys.MOMENT, inputMomentId);
   }
   if (URLKeys.BOOKMARK in urlParams && urlParams[URLKeys.BOOKMARK] != "null") {
-    console.log(urlParams[URLKeys.BOOKMARK]);
+    //console.log(urlParams[URLKeys.BOOKMARK]);
     var bmjson = JSON.parse(decodeURI(urlParams[URLKeys.BOOKMARK]));
-
     for (var key in bmjson) {
       bookmarkManager.addBookmark(key, bmjson[key]);
     }

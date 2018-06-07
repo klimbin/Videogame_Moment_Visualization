@@ -47,8 +47,8 @@
     "2": "./pic/Super Bomberman 2 (USA)_2D.json",
     "3": "./pic/Super Bomberman 2 (USA)_3D.json"
   },
-  "Super Metroid": {
-    "2": "./pic/Super Metroid_2D.json",
-    "3": "./pic/Super Metroid_3D.json"
+  "Super Metroid (Japan, USA)": {
+    "3": "./pic/Super Metroid (Japan, USA)_3D.json",
+    "2": "./pic/Super Metroid (Japan, USA)_2D.json"
   }
 }

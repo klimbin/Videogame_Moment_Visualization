@@ -52,12 +52,14 @@ function onShowBookmarkBar(id){
     $('#bookmark-btn').switchClass('button-clicked', 'button','fast');
     //bookmarkManager.hideBookmarkLabels();
     //Add time div
-    document.getElementById("timeline-wrapper").style.display = "none";
+    //document.getElementById("timeline-wrapper").style.display = "none";
+    document.getElementById("timeline-wrapper").style.visibility = "hidden";
   } else {
     $('#bookmark-btn').switchClass('button', 'button-clicked','fast');
     //bookmarkManager.showBookmarkLabels();
     //Hide time div
-    document.getElementById("timeline-wrapper").style.display = "block";
+    //document.getElementById("timeline-wrapper").style.display = "block";
+    document.getElementById("timeline-wrapper").style.visibility = "visible";
   }
 }
 function onShowCorpus(id){
@@ -78,70 +80,109 @@ function onShowCorpus(id){
   }
 }
 function onShowAnimationBar(id) {
-  if (g_dialogVisible) { return; }
-
   var isAnimationBtnClicked = $('#' + id).hasClass("button-clicked");
   if ( isAnimationBtnClicked ) {
     $('#' + id).switchClass('button-clicked', 'button','fast');
-    document.getElementById("animation_bar").style.display = "none";
+    document.getElementById("video-div").style.display = "none";
+    g_dialogVisible = false;
   } else {
     $('#' + id).switchClass('button', 'button-clicked','fast');
-    document.getElementById("animation_bar").style.display = "block";
-
+    resizeVideoDiv();
+    document.getElementById("video-div").style.display = "block";
+    g_dialogVisible = true;
   }
+}
+
+function resizeVideoDiv() {
+  var div = $(".half-page-dialog");
+  div.css("position", "absolute");
+  HEIGHT = window.innerHeight;
+  WIDTH = window.innerWidth;
+  var x = HEIGHT;
+  if (x > WIDTH) {
+    x = WIDTH;
+  }
+  var height = x * 0.6;
+  var width = height;
+  var top = (HEIGHT-height)/2.0;
+  var left = (WIDTH - height)/2.0;
+  div.css("top", top);
+  div.css("left", left);
+  div.css("height", height);
+  div.css("width", width);
 }
 
 //Make the DIV element draggagle:
-dragElement(document.getElementById(("animation_bar")));
-function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  elmnt.onmousedown = dragMouseDown;
-
-  function dragMouseDown(e) {
-    e = e || window.event;
-    // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
-  }
-
-  function elementDrag(e) {
-    e = e || window.event;
-    // calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-  }
-
-  function closeDragElement() {
-    /* stop moving when mouse button is released:*/
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
-}
+// dragElement(document.getElementById(("animation_bar")));
+// function dragElement(elmnt) {
+//   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+//   elmnt.onmousedown = dragMouseDown;
+//
+//   function dragMouseDown(e) {
+//     e = e || window.event;
+//     // get the mouse cursor position at startup:
+//     pos3 = e.clientX;
+//     pos4 = e.clientY;
+//     document.onmouseup = closeDragElement;
+//     // call a function whenever the cursor moves:
+//     document.onmousemove = elementDrag;
+//   }
+//
+//   function elementDrag(e) {
+//     e = e || window.event;
+//     // calculate the new cursor position:
+//     pos1 = pos3 - e.clientX;
+//     pos2 = pos4 - e.clientY;
+//     pos3 = e.clientX;
+//     pos4 = e.clientY;
+//     // set the element's new position:
+//     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+//     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+//   }
+//
+//   function closeDragElement() {
+//     /* stop moving when mouse button is released:*/
+//     document.onmouseup = null;
+//     document.onmousemove = null;
+//   }
+// }
 
 function onPlay(id) {
-  if (g_dialogVisible) { return; }
-
-  if (id == "playpause-btn") {
-    startId = Number(document.getElementById('startId').value);
-    stopId = Number(document.getElementById('stopId').value);
-    element = document.getElementById('playpause');
-    if ( element.innerText == "play_circle_outline") {
-      element.innerText = "pause_circle_outline";
-      //pause animation
-      animationPlaying = false;
-    } else {
-      element.innerText = "play_circle_outline";
-      //play animation
-      animationPlaying = true;
-    }
+  switch (id) {
+    case "playpause-btn":
+      startId = Number(document.getElementById('video_startId').value);
+      stopId = Number(document.getElementById('video_stopId').value);
+      element = document.getElementById('playpause');
+      if ( element.innerText == "play_circle_outline") {
+        element.innerText = "pause_circle_outline";
+        //play animation
+        animationPlaying = true;
+        videoManager.play();
+      } else {
+        element.innerText = "play_circle_outline";
+        //pause animation
+        animationPlaying = false;
+        videoManager.pause();
+      }
+      break;
+    case "loop-reset-btn":
+      videoManager.videoElement.currentTime = 0.0;
+      document.getElementById("video_startId").value = "";
+      document.getElementById("video_stopId").value = "";
+      break;
+    case "replay-btn":
+      //videoManager.videoElement.currentTime = videoManager.startTime;
+      videoManager.replay();
+      break;
+    case "fastfwd-btn":
+      //videoManager.videoElement.currentTime += 1.0 / 24.0;
+      videoManager.forward();
+      break;
+    case "fastrwd-btn":
+      //videoManager.videoElement.currentTime -= 1.0 / 24.0;
+      videoManager.rewind();
+      break;
+    // default:
   }
 }
 function animation(startId, stopId) {
@@ -252,4 +293,16 @@ function onShowHelp() {
 
 function onNavigateToIndex() {
   window.location.href = './index.html';
+}
+
+function onUnmute() {
+  var element = document.getElementById("mute-button");
+  if ( element.innerText == "volume_off") {
+    element.innerText = "volume_up";
+    audioManager.muted = false;
+  } else { //"volume_on"
+    element.innerText = "volume_off";
+    audioManager.muted = true;
+  }
+
 }

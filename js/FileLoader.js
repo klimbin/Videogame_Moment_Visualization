@@ -1,10 +1,6 @@
-var fileManager = function() {
-  this.fileLoader = new THREE.FileLoader();
-  this.textureLoader = new THREE.TextureLoader();
-  this.imageLoader = new THREE.ImageLoader();
-
-  this.loadImages = function(dir) {
-    
+var dataManager = function() {
+  this.jsonData = null;
+  this.jsonData = function(jsonData) {
+    this.jsonData = jsonData;
   }
-
 }

@@ -288,3 +288,15 @@ function resizeTimeline(){
     var timeline = TimeKnots.draw(id, timelineData[tm], {dateDimension:false, color: "#7575a3", width:timeline_width, height: '50', showLabels: true, labelFormat: "%Y",lineWidth:2});
   }
 }
+
+function onTimeline() {
+  if (g_dialogVisible) { return; }
+
+  event = event || window.event;
+		switch(event.keyCode){
+		case 88:
+			//delete bookmark
+      console.log("delete!");
+			break;
+	}
+}

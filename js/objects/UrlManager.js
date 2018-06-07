@@ -67,7 +67,7 @@ function UrlManager() {
     if (key == URLKeys.CORPORA) {
       this.urlParams[URLKeys.CORPORA] = value;
     } else {
-      this.urlParams[URLKeys.CORPORA] = Object.keys(spriteManager.interactionObjects);
+      this.urlParams[URLKeys.CORPORA] = Object.keys(spriteManager.spriteGroups);
     }
     if (key == URLKeys.MOMENT) {
       this.urlParams[URLKeys.MOMENT] = value;

@@ -23,25 +23,30 @@
 		<div id="container"></div>
 		<div class="top-bar" id="top_bar" style="display:none">
 			<div class="top-btn-wrapper corpora-btn-wrapper">
-				<button class="button" id="corpora-btn"  title="Toggle on/off Corpora" onclick="onShowCorporaBar(this.id)">Corpora</button>
+				<button class="button" id="corpora-btn"  title="Toggle on/off corpora" onclick="onShowCorporaBar(this.id)">Corpora</button>
 			</div>
 			<div class="top-btn-wrapper bookmark-btn-wrapper">
-				<button class="button" id="bookmark-btn" title="Show bookmarks" onclick="onShowBookmarkBar(this.id)">Bookmark</button>
+				<button class="button" id="bookmark-btn" title="Show timelines and bookmarks" onclick="onShowBookmarkBar(this.id)">Bookmark</button>
 			</div>
 			<div class="top-btn-wrapper animation-btn-wrapper">
 				<button class="button" id="animation-btn" title="Show animations" onclick="onShowAnimationBar(this.id)">Animation</button>
 			</div>
 			<div class="top-btn-wrapper search-container">
 				<div class="search-wrapper">
-					<input type="text" placeholder="Search By Id..." id="moment_id" name="search">
+					<input type="text" title="Input global ID to search for a specific moment" placeholder="Search By ID..." id="moment_id" name="search">
 					<button type="submit" class="search-btn" id="moment_button" onclick="onMomentInput()"><i class="fa fa-search"></i></button>
 				</div>
 			</div>
 			<div class="top-btn-wrapper help-button-wrapper">
-				<button class="button" id="help-btn" title="Help" onclick="onShowHelp()"><b>?</b></button>
+				<button class="button-no-border" id="help-btn" title="Help" onclick="onShowHelp()"><i class="my-icons material-icons" style="vertical-align: middle;" id="help-button">help</i></button>
 			</div>
 			<div class="top-btn-wrapper exit-button-wrapper">
-				<button class="button" id="exit-btn" title="Go back to the main page" onclick="onNavigateToIndex()"><b>X</b></button>
+				<button class="button-no-border" id="exit-btn" title="Go back to the main page" onclick="onNavigateToIndex()"><i class="my-icons material-icons" style="vertical-align: middle;" id="power-button">power_settings_new</i></button>
+			</div>
+			<div class="top-btn-wrapper mute-button-wrapper">
+				<div class="mute-icon-container" id="mute-icon-container">
+					<button class="button-no-border" id="mute-btn" title="Mute/Unmute" onclick="onUnmute()"><i class="my-icons material-icons" style="vertical-align: middle;" id="mute-button">volume_off</i></button>
+				</div>
 			</div>
 			<!--div class="question-container">
 					<div style="position: absolute; height: 100%; vertical-align: middle;">
@@ -50,35 +55,43 @@
 			</div-->
 		</div>
 		<div id="corpora_bar" style="display:none"></div>
-		<div id="animation_bar" style="display:none">
-			<input type="text" placeholder="StartId" id="startId" name="input_start">
-			<input type="text" placeholder="StopId" id="stopId" name="input_stop">
-			<div id="player_controls">
-				<button type="submit" class="control-button" id="fastrwd-btn" onclick="onPlay(this.id)"><i class="material-icons" id="fastRwd">fast_rewind</i></button>
-				<button type="submit" class="control-button" id="playpause-btn" onclick="onPlay(this.id)"><i class="material-icons" id="playpause">play_circle_outline</i></button>
-				<!--button type="submit" class="control-button" id="pause-btn" onclick="onPlay(this.id)"><i class="material-icons" id="pause" style="display:none">pause_circle_outline</i></button-->
-				<button type="submit" class="control-button" id="fastfwd-btn" onclick="onPlay(this.id)"><i class="material-icons" id="fastFwd">fast_forward</i></button>
-				<button type="submit" class="control-button" id="replay-btn" onclick="onPlay(this.id)"><i class="material-icons" id="replay">replay</i></button>
-				<button type="submit" class="control-button" id="loop-btn" onclick="onPlay(this.id)"><i class="material-icons" id="loop">loop</i></button>
+		<div id="video-div" class="dialog-wrapper half-page-dialog" style="display:none">
+			<div id="video-box" class="video-box">
+				<video id="moment-video" class="video_embeded">
+					<source id="moment-video-src" type="video/mp4" src="./Game_data/7th Saga, The (USA)/human/movie.mp4"></source>
+					<p>Sorry, your browser does not support the &lt;video&gt; element.</p>
+				</video>
+			</div>
+			<div id="animation_bar">
+				<input type="text" title="Set start point with global ID" placeholder="StartId" id="video_startId" name="input_start">
+				<input type="text" title="Set stop point with global ID" placeholder="StopId" id="video_stopId" name="input_stop">
+				<div id="player_controls">
+					<button type="submit" title="jump back to the last moment" class="control-button" id="fastrwd-btn" onclick="onPlay(this.id)"><i class="material-icons" id="fastRwd">skip_previous</i></button><!--fast_rewind-->
+					<button type="submit" title="play|pause the video" class="control-button" id="playpause-btn" onclick="onPlay(this.id)"><i class="material-icons" id="playpause">play_circle_outline</i></button>
+					<!--button type="submit" class="control-button" id="pause-btn" onclick="onPlay(this.id)"><i class="material-icons" id="pause" style="display:none">pause_circle_outline</i></button-->
+					<button type="submit" title="jump to the next moment" class="control-button" id="fastfwd-btn" onclick="onPlay(this.id)"><i class="material-icons" id="fastFwd">skip_next</i></button> <!--fast_forward-->
+					<button type="submit" title="replay from startId" class="control-button" id="replay-btn" onclick="onPlay(this.id)"><i class="material-icons" id="replay">replay</i></button>
+					<button type="submit" title="reset startId|stopId" class="control-button" id="loop-reset-btn" onclick="onPlay(this.id)"><i class="material-icons" id="loop">clear</i></button>
+				</div>
 			</div>
 		</div>
 		<div id="bottomright-bar" style="display:none;">
 			<p id="game-info"></p>
 		</div>
-		<div id='bookmarkInputDiv' style='display:none'>
+		<div id="bookmarkInputDiv" style="display:none">
 			<div class="dialog-wrapper bottom-dialog">
 				Please enter comment for the bookmark (optional):<br />
-				<input type='text' class='roundInput' id='bookmarkComment'><br />
-				<table class='dialog-button-table'><tr><td>
+				<input type="text" class="roundInput" id="bookmarkComment"><br />
+				<table class="dialog-button-table"><tr><td>
 				<button id="bookmark-commit" class="dialog-button" onclick="bookmarkDialog.dialogReturned()">Bookmark</button>
 				</td><td>
 				<button class="dialog-button" onclick="bookmarkDialog.dialogCancelled()">Cancel</button>
 				</td></tr></table>
 			</div>
 		</div>
-		<div id='helpDialogDiv' style='display:none'>
+		<div id="helpDialogDiv" style="display:none">
 			<div class="dialog-wrapper full-page-dialog">
-				<table class='dialog-button-table dialog-wide-table'><tr style="height:90%; text-align: left"><td>
+				<table class="dialog-button-table dialog-wide-table"><tr style="height:90%; text-align: left"><td>
 <h3>Navigation</h3>
 <ul>
 	<li>Mouse scroll to zoom in or zoom out</li>
@@ -101,7 +114,7 @@
 				</td></tr></table>
 			</div>
 		</div>
-		<div class = "timeline-wrapper" id="timeline-wrapper" style="display:none"></div>
+		<div class = "timeline-wrapper" id="timeline-wrapper" style="visibility: hidden;"></div>
 		<script src="https://code.jquery.com/jquery-3.3.1.js"
 		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
 		crossorigin="anonymous"></script>
@@ -121,12 +134,14 @@
 		<script src="js/objects/Skybox.js"></script>
 		<script src="js/Animation.js"></script>
 		<script src="js/AudioLoad.js"></script>
+		<script src="js/objects/DataManager.js"></script>
 		<script src="js/objects/MetalabelManager.js"></script>
 		<script src="js/objects/spriteManager.js"></script>
 		<script src="js/objects/CameraManager.js"></script>
 		<script src="js/objects/UrlManager.js"></script>
 		<script src="js/objects/BookmarkManager.js"></script>
 		<script src="js/objects/Dialogs.js"></script>
+		<script src="js/objects/VideoManager.js"></script>
 		<script src="js/EventHandler.js"></script>
 		<script src="js/uiHandler.js"></script>
 		<script src="js/EventQueue.js"></script>
