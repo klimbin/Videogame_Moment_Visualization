@@ -166,6 +166,7 @@ function cameraReady() {
     var inputMomentId = Number(urlParams[URLKeys.MOMENT]);
     labelManager.showNearbyLabels(inputMomentId, 1, true);
     urlManager.updateURL(URLKeys.MOMENT, inputMomentId);
+    g_lastSelected.object = spriteManager.spriteDictionary[inputMomentId].object;
   }
   if (URLKeys.BOOKMARK in urlParams && urlParams[URLKeys.BOOKMARK] != "null") {
     //console.log(urlParams[URLKeys.BOOKMARK]);
