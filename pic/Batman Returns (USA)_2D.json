@@ -40375,5 +40375,10 @@
       "bin": "./pic/Batman Returns (USA)/human_2D.bin"
     },
     "spriteSheetPath": "./pic/Batman Returns (USA)/human.png"
+  },
+  "video": {
+    "source": "./pic/Batman Returns (USA)/movie.mp4",
+    "fps": 24,
+    "total": 5765
   }
 }
