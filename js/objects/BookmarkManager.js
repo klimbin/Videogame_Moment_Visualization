@@ -43,6 +43,7 @@ function BookmarkManager() {
   }
   this.showBookmark = function(momentId) {
     g_currentTarget = Number(momentId);
+    g_autoRotate = false;
     labelManager.showNearbyLabels(g_currentTarget, 0, true);
     g_lastSelected.object = spriteManager.spriteDictionary[g_currentTarget].object;
   }
