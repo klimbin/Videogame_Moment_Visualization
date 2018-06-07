@@ -52758,5 +52758,10 @@
       "bin": "./pic/Super Bomberman 2 (USA)/human_2D.bin"
     },
     "spriteSheetPath": "./pic/Super Bomberman 2 (USA)/human.png"
+  },
+  "video": {
+    "source": "./pic/Super Bomberman 2 (USA)/movie.mp4",
+    "fps": 24,
+    "total": 7534
   }
 }

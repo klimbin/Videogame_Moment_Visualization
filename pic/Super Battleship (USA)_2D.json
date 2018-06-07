@@ -41264,5 +41264,10 @@
       "bin": "./pic/Super Battleship (USA)/human_2D.bin"
     },
     "spriteSheetPath": "./pic/Super Battleship (USA)/human.png"
+  },
+  "video": {
+    "source": "./pic/Super Battleship (USA)/movie.mp4",
+    "fps": 24,
+    "total": 5892
   }
 }

@@ -39619,5 +39619,10 @@
       "bin": "./pic/Final Fantasy II (USA) (Rev 1)/human_2D.bin"
     },
     "spriteSheetPath": "./pic/Final Fantasy II (USA) (Rev 1)/human.png"
+  },
+  "video": {
+    "source": "./pic/Final Fantasy II (USA) (Rev 1)/movie.mp4",
+    "fps": 24,
+    "total": 5657
   }
 }

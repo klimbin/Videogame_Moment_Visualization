@@ -32278,5 +32278,10 @@
       "bin": "./pic/Super Mario World (USA)/human_3D.bin"
     },
     "spriteSheetPath": "./pic/Super Mario World (USA)/human.png"
+  },
+  "video": {
+    "source": "./pic/Super Mario World (USA)/movie.mp4",
+    "fps": 24,
+    "total": 4606
   }
 }

@@ -34691,5 +34691,10 @@
       "bin": "./pic/The 7th Saga (USA)/human_3D.bin"
     },
     "spriteSheetPath": "./pic/The 7th Saga (USA)/human.png"
+  },
+  "video": {
+    "source": "./pic/The 7th Saga (USA)/movie.mp4",
+    "fps": 24,
+    "total": 4953
   }
 }

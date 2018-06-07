@@ -38695,5 +38695,10 @@
       "bin": "./pic/Final Fantasy III (USA) (Rev 1)/human_3D.bin"
     },
     "spriteSheetPath": "./pic/Final Fantasy III (USA) (Rev 1)/human.png"
+  },
+  "video": {
+    "source": "./pic/Final Fantasy III (USA) (Rev 1)/movie.mp4",
+    "fps": 24,
+    "total": 5525
   }
 }

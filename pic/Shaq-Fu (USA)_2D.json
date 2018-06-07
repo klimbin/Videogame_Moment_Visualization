@@ -43196,5 +43196,10 @@
       "bin": "./pic/Shaq-Fu (USA)/human_2D.bin"
     },
     "spriteSheetPath": "./pic/Shaq-Fu (USA)/human.png"
+  },
+  "video": {
+    "source": "./pic/Shaq-Fu (USA)/movie.mp4",
+    "fps": 24,
+    "total": 6168
   }
 }

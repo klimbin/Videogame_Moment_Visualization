@@ -38786,5 +38786,10 @@
       "bin": "./pic/Double Dragon V - The Shadow Falls (USA)/human_2D.bin"
     },
     "spriteSheetPath": "./pic/Double Dragon V - The Shadow Falls (USA)/human.png"
+  },
+  "video": {
+    "source": "./pic/Double Dragon V - The Shadow Falls (USA)/movie.mp4",
+    "fps": 24,
+    "total": 5538
   }
 }

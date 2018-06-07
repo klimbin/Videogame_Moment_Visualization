@@ -38226,5 +38226,10 @@
       "bin": "./pic/Sid Meier's Civilization (USA)/human_2D.bin"
     },
     "spriteSheetPath": "./pic/Sid Meier's Civilization (USA)/human.png"
+  },
+  "video": {
+    "source": "./pic/Sid Meier's Civilization (USA)/movie.mp4",
+    "fps": 24,
+    "total": 5458
   }
 }

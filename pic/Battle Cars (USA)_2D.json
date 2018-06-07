@@ -38009,5 +38009,10 @@
       "bin": "./pic/Battle Cars (USA)/human_2D.bin"
     },
     "spriteSheetPath": "./pic/Battle Cars (USA)/human.png"
+  },
+  "video": {
+    "source": "./pic/Battle Cars (USA)/movie.mp4",
+    "fps": 24,
+    "total": 5427
   }
 }
