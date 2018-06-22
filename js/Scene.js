@@ -24,6 +24,7 @@ var audioManager = new AudioManager();
 var eventQueue = new EventQueue();
 var bookmarkDialog = new BookmarkInput();
 var helpDialog = new HelpDialog();
+var shareDialog = new ShareDialog();
 var videoManager = new VideoManager();
 var dataManager = new DataManager();
 ///////////////////Chris's variables////////////////////////////////////////////
@@ -97,7 +98,6 @@ function initScene() {
   //////////////////////////////////////////////////chris's code
   window.addEventListener( 'keyup', myKeyUp, false );
   window.addEventListener( 'keydown', myKeyDown, false );
-  window.addEventListener( 'keydown', onTimeline, false );
   window.addEventListener('resize', resizeTimeline, false );
   window.addEventListener('resize', resizeVideoDiv, false );
 
@@ -146,9 +146,10 @@ function loadingScene() {
   {
     addCorporaButtons();
     addTimelineDivs();
-    createTimeline();
-    cameraReady();
+    //createTimeline();
+    bookmarkManager.init();
     videoManager.init(dataManager.jsonData.video.source, dataManager.jsonData.video.fps, dataManager.jsonData.video.total);
+    cameraReady();
     showPage();
     isPageShown = true;
   }
@@ -167,6 +168,7 @@ function cameraReady() {
     labelManager.showNearbyLabels(inputMomentId, 1, true);
     urlManager.updateURL(URLKeys.MOMENT, inputMomentId);
     g_lastSelected.object = spriteManager.spriteDictionary[inputMomentId].object;
+    g_autoRotate = false;
   }
   if (URLKeys.BOOKMARK in urlParams && urlParams[URLKeys.BOOKMARK] != "null") {
     //console.log(urlParams[URLKeys.BOOKMARK]);

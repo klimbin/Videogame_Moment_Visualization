@@ -33,6 +33,7 @@ function CameraManager() {
     camera.position.set(this.targetCameraPosition.x, this.targetCameraPosition.y, this.targetCameraPosition.z);
     controls.target = targetObj.position;
     camera.lookAt(targetObj.position);
+    showFavoriteBtn();
   }
 
   //Show only the target sprite, hiding other sprites in camera view

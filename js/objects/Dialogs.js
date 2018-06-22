@@ -67,3 +67,28 @@ var HelpDialog = function() {
     g_dialogVisible = false;
   }
 }
+
+var ShareDialog = function() {
+  var self = this;
+  this.dialogDiv = null;
+  this.init=function() {
+    this.dialogDiv = document.getElementById('shareDialogDiv');
+  }
+  this.init();
+  this.showDialog=function() {
+    g_dialogVisible = true;
+    document.getElementById("link-text").value = window.location.href;
+    this.dialogDiv.style.display = "block";
+  }
+  this.dialogCancelled = function() {
+    this.dialogDiv.style.display = "none";
+    g_dialogVisible = false;
+  }
+  this.copy = function() {
+    document.getElementById("link-text").select();
+    document.execCommand("copy");
+
+    /* Alert the copied text */
+    alert("Link Copied!");
+  }
+}

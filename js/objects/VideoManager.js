@@ -70,4 +70,14 @@ function VideoManager() {
     this.videoElement.currentTime = this.startTime;
     this.currentTime = this.videoElement.currentTime;
   }
+  this.reset = function() {
+    videoManager.videoElement.currentTime = 0.0;
+    document.getElementById("video_startId").value = "";
+    document.getElementById("video_stopId").value = "";
+    this.videoElement.pause();
+    this.playing = false;
+  }
+  this.getCurrentMoment = function() {
+    return Math.floor(this.currentTime*this.fps);
+  }
 }

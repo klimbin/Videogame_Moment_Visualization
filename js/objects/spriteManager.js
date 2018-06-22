@@ -1,13 +1,13 @@
 function SpriteManager() {
   var self = this;
-  this.anchor = new THREE.Vector2(0.5,0.5);
+  this.anchor = new THREE.Vector2(0.5,0.3);
   this.scene = null;
   this.spriteDictionary = {};
   this.spriteGroups = {}; //Sprites are grouped as corpus
   this.interactionObjects = {};
 
 
-  var addSpritesToScene = function(corpusName, numberBase, dataObj) {
+  var addSpritesToScene = function(corpusName, startingBase, dataObj) {
     var game = dataObj.game;
     var screenshotsFolder = dataObj.screenshots_folder;
     var embeddingsFolder = dataObj.embeddings_folder;
@@ -37,7 +37,7 @@ function SpriteManager() {
         positionArray.push(temp);
       }
       for (var i = 0; i < number; i++){
-        var totalIndex = i + numberBase.val;
+        var totalIndex = i + startingBase; //numberBase.val;
         //Made some modification in Three.js, adding additional params in Sprite
         var params = {
           uvOffset: {
@@ -79,7 +79,7 @@ function SpriteManager() {
       self.interactionObjects[corpusName] = spriteGroup;
       //indexing each corpus as a group
       self.spriteGroups[corpusName] = spriteGroup;
-      numberBase.val += number; //Counter for globalID
+      //numberBase.val += number; //Counter for globalID
       self.scene.add(spriteGroup);
       g_actionCounter += 1;
     });  //end of fileLoader.load
@@ -88,10 +88,14 @@ function SpriteManager() {
   var callbackLoadSprite = function(data) {
     var jsonData = JSON.parse(data);
     dataManager.updateJSONData(jsonData);
-    var numberBase = {val: 0};
+    //var numberBase = {val: 0};
+    var startId = 0;
     //corpora iteration
-    for (var corpusName in jsonData.corpus) {
-      addSpritesToScene(corpusName, numberBase, jsonData);
+    var corporaNames = Object.keys(jsonData.corpus).sort();
+    for (var i =0; i < corporaNames.length; i++) {
+      //addSpritesToScene(corporaNames[i], numberBase, jsonData);
+      addSpritesToScene(corporaNames[i], startId, jsonData);
+      startId += Number(jsonData[corporaNames[i]].totalCount);
     }; // end of for each corpusName
     g_actionCounter += 1;
   };

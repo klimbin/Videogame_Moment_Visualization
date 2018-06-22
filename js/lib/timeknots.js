@@ -192,8 +192,6 @@ var TimeKnots = {
     .style("opacity", 0)})
     .on("mouseup", function(d){
       if (g_dialogVisible) { return; }
-
-      console.log("timeline clicked!:" + d.momentId);
       bookmarkManager.showBookmark( Number(d.momentId));
     });
 
@@ -218,11 +216,9 @@ var TimeKnots = {
          .attr("x", function(d){if(cfg.horizontalLayout){return  cfg.width -  d3.max([this.getBBox().width, (margin+this.getBBox().width)])} return Math.floor(this.getBBox().width)})
          .attr("y", function(d){if(cfg.horizontalLayout){return Math.floor(cfg.height/2+(margin+this.getBBox().height))}return cfg.height-margin+this.getBBox().height/2})
     }
-
-
     svg.on("mousemove", function(){
         tipPixels = parseInt(tip.style("height").replace("px", ""));
     return tip.style("top", (d3.event.pageY-tipPixels-margin)+"px").style("left",(d3.event.pageX+20)+"px");})
-    .on("mouseout", function(){return tip.style("opacity", 0).style("top","0px").style("left","0px");});
+    .on("mouseout", function(){return tip.style("opacity", 0).style("top","0px").style("left","0px").style("z-index","5");});
   }
 }

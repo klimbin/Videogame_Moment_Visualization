@@ -1,20 +1,37 @@
 function BookmarkManager() {
   this.bookmarkList=[];
-  this.bookmarksDict={};
+  this.bookmarkDict={};
   this.numberOfPages=0;
   this.currentPage=0;
   this.comments = {};
+  this.timeLine = new Timeline();
 
+  this.init = function() {
+    this.timeLine.createTimeline();
+  }
   this.addBookmark = function(momentId, comments=null) {
-    if (!this.bookmarksDict.hasOwnProperty(momentId) ||
+    if (!this.bookmarkDict.hasOwnProperty(momentId) ||
         this.comments[momentId] != comments) {  // or if modifying comments
       this.numberOfPages += 1;
       this.currentPage = this.numberOfPages - 1;
-      this.bookmarksDict[momentId] = this.numberOfPages-1;
+      this.bookmarkDict[momentId] = this.numberOfPages-1;
       this.bookmarkList[this.numberOfPages-1] = momentId;
       this.comments[momentId] = comments;
     }
-    addTimeline(momentId,comments);
+    this.timeLine.addTimeline(momentId,comments);
+  }
+  this.removeBookmark = function(momentId) {
+    if (this.bookmarkDict.hasOwnProperty(momentId)) {
+      this.numberOfPages -= 1;
+      this.currentPage = 0;
+      delete this.bookmarkDict[momentId];
+      for (var i = 0; i< this.bookmarkList.length; i++) {
+        if (this.bookmarkList[i] == momentId) {
+          this.bookmarkList.splice(i,1);
+        }
+      }
+    }
+    this.timeLine.deleteTimeline(momentId);
   }
   this.getLastBookmark = function() {
     this.momentId = null;
@@ -58,13 +75,13 @@ function BookmarkManager() {
     }
   }
   this.hideBookmarkLabels = function() {
-    for (var key in this.bookmarksDict){
+    for (var key in this.bookmarkDict){
       labelManager.removeLabelFromScene(key);
     }
   }
   this.getBookmarks = function() {
     var bookmark_json = {};
-    for (var key in this.bookmarksDict) {
+    for (var key in this.bookmarkDict) {
       bookmark_json[key] = this.comments[key];
     }
     return bookmark_json;

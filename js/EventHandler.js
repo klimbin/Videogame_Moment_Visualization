@@ -56,6 +56,7 @@ function onMouseUp(event) {
       g_lastSelected.object = null;
       g_autoRotate = true;
       urlManager.updateURL(URLKeys.MOMENT, null);
+      hideFavoriteBtn();
       //console.log('Nothing got clicked');
     } //end of intersect.length > 0
   } // end of g_isFlying
@@ -180,23 +181,14 @@ function onBookmarking(event) {
   if (g_dialogVisible) { return; }
 
   if (g_lastSelected.object != null && (event.key == 'b' || event.key == 'B')){
-    // display dialog
-    g_dialogVisible = true;
-
-    var objNameVal = Number(g_lastSelected.object.name);
-    var objComment = null;
-    if (bookmarkManager.comments.hasOwnProperty(objNameVal)) {
-        objComment = bookmarkManager.comments[objNameVal];
-    }
-
-    bookmarkDialog.showDialog(function(objName, comment) {
-      bookmarkManager.addBookmark(objName, comment);
-      urlManager.updateURL(URLKeys.BOOKMARK, bookmarkManager.getBookmarks());
-    },
-    objNameVal,
-    objComment);
+    // // display dialog
+    // g_dialogVisible = true;
+    onAddBookmark();
+  } else if (g_lastSelected.object != null && (event.key == 'Backspace')) {
+    onRemoveBookmark();
   }
 }
+
 //Retrieve moment by bookmark
 function onReadBookmark(event) {
   if (g_dialogVisible) { return; }
@@ -278,25 +270,5 @@ function updateRotation(){
 	//update the rotation's direction
 };
 function resizeTimeline(){
-  // var elem = $('#timelineNonDate');
-  // elem.html('');
-  timeline_width = $( '.timeline-wrapper' ).width() * 0.9;
-  for (tm in timelineData) {
-    var id = "#timeline-" + tm;
-    var elem = $(id);
-    elem.html('');
-    var timeline = TimeKnots.draw(id, timelineData[tm], {dateDimension:false, color: "#7575a3", width:timeline_width, height: '50', showLabels: true, labelFormat: "%Y",lineWidth:2});
-  }
-}
-
-function onTimeline() {
-  if (g_dialogVisible) { return; }
-
-  event = event || window.event;
-		switch(event.keyCode){
-		case 88:
-			//delete bookmark
-      console.log("delete!");
-			break;
-	}
+  bookmarkManager.timeLine.resizeTimeline();
 }

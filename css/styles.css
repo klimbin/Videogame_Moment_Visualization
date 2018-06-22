@@ -11,13 +11,13 @@ body, html {
   top: 70%;
   left: 40%;
   width: 20%;
-  background-color: #7575a3;
+  background-color: #5c5c8a;
   color: white;
   padding: 0px;
   margin: 0px;
 }
 .startbutton {
-  background-color: #7575a3;
+  background-color: #5c5c8a;
   width: 100%;
   height: 100%;
   color: white;
@@ -38,7 +38,7 @@ body, html {
   bottom: 0;
   height: 40px;
   width: 100%;
-  background-color: #7575a3;
+  background-color: #5c5c8a;
   color: white;
   text-align: center;
   font-size: 1.5vw;
@@ -93,7 +93,7 @@ iframe {
   background-size: cover;
 }
 .dropbtn {
-  background-color: #7575a3;
+  background-color: #5c5c8a;
   width: 100%;
   height: 100%;
   color: white;
@@ -124,7 +124,7 @@ iframe {
   top: 55%;
   left: 50%;
   width: 20%;
-  background-color: #7575a3;
+  background-color: #5c5c8a;
   color: white;
   padding: 0px;
   margin: 0px;
@@ -167,7 +167,7 @@ iframe {
   height: 7%;
   font-size: 2vw;
   color:#484848;
-  text-shadow: 1px 1px 1px #7575a3;
+  text-shadow: 1px 1px 1px #5c5c8a;
 }
 
 .toggle_btn_wrapper {
@@ -182,8 +182,8 @@ iframe {
   width: 100%;
   height: 100%;
   border-radius: 999px;
-  background-color: #7575a3;
-  box-shadow: inset 0 0 0 10px #7575a3;
+  background-color: #5c5c8a;
+  box-shadow: inset 0 0 0 10px #5c5c8a;
   color:white;
   text-shadow: 1px 1px 1px #000000;
   cursor: pointer;
@@ -192,7 +192,7 @@ iframe {
   border: 0px;
 }
 .toggle_btn:hover, .toggle_btn:focus {
-  box-shadow: inset 0 0 0 1px #7575a3;
+  box-shadow: inset 0 0 0 1px #5c5c8a;
   background-color: lightblue;
   border: 0px;
 }
@@ -218,8 +218,8 @@ iframe {
 #invisible_checkbox_background.ios-switch_background + div {
   width: 100%;	height: 100%;
 	border-radius: 999px;
-	background-color: #7575a3;
-	box-shadow: inset 0 0 0 10px #7575a3;
+	background-color: #5c5c8a;
+	box-shadow: inset 0 0 0 10px #5c5c8a;
   color:white;
   text-shadow: 1px 1px 1px #000000;
 }
@@ -228,12 +228,12 @@ iframe {
 #invisible_checkbox.ios-switch + div {
   width: 100%;	height: 100%;
 	border-radius: 999px;
-	/* box-shadow: inset 0 0 0 10px #7575a3; */
+	/* box-shadow: inset 0 0 0 10px #5c5c8a; */
 }
 
 #invisible_checkbox.ios-switch:checked + div {
 	background-position: 0 0;
-	/* box-shadow: inset 0 0 0 10px #7575a3; */
+	/* box-shadow: inset 0 0 0 10px #5c5c8a; */
 }
 
 #invisible_checkbox.ios-switch + div > div {

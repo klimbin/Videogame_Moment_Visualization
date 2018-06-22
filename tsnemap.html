@@ -26,7 +26,7 @@
 				<button class="button" id="corpora-btn"  title="Toggle on/off corpora" onclick="onShowCorporaBar(this.id)">Corpora</button>
 			</div>
 			<div class="top-btn-wrapper bookmark-btn-wrapper">
-				<button class="button" id="bookmark-btn" title="Show timelines and bookmarks" onclick="onShowBookmarkBar(this.id)">Bookmark</button>
+				<button class="button" id="bookmark-btn" title="Show timelines and bookmarks" onclick="onShowBookmarkBar(this.id)">Timeline</button>
 			</div>
 			<div class="top-btn-wrapper animation-btn-wrapper">
 				<button class="button" id="animation-btn" title="Show animations" onclick="onShowAnimationBar(this.id)">Animation</button>
@@ -44,9 +44,10 @@
 				<button class="button-no-border" id="exit-btn" title="Go back to the main page" onclick="onNavigateToIndex()"><i class="my-icons material-icons" style="vertical-align: middle;" id="power-button">power_settings_new</i></button>
 			</div>
 			<div class="top-btn-wrapper mute-button-wrapper">
-				<div class="mute-icon-container" id="mute-icon-container">
-					<button class="button-no-border" id="mute-btn" title="Mute/Unmute" onclick="onUnmute()"><i class="my-icons material-icons" style="vertical-align: middle;" id="mute-button">volume_off</i></button>
-				</div>
+				<button class="button-no-border" id="mute-btn" title="Mute/Unmute" onclick="onUnmute()"><i class="my-icons material-icons" style="vertical-align: middle;" id="mute-button">volume_off</i></button>
+			</div>
+			<div class="top-btn-wrapper share-button-wrapper">
+				<button class="button-no-border" id="share-btn" title="Share" onclick="onShare()"><i class="my-icons material-icons" style="vertical-align: middle;" id="share-button">share</i></button>
 			</div>
 			<!--div class="question-container">
 					<div style="position: absolute; height: 100%; vertical-align: middle;">
@@ -56,6 +57,10 @@
 		</div>
 		<div id="corpora_bar" style="display:none"></div>
 		<div id="video-div" class="dialog-wrapper half-page-dialog" style="display:none">
+			<div id="drag-icon-wrapper">
+				<i title="This is a draggable window." class="material-icons" id="video-drag-icon">drag_indicator</i>
+				<span id="moment-index-paused"></span>
+			</div>
 			<div id="video-box" class="video-box">
 				<video id="moment-video" class="video_embeded">
 					<source id="moment-video-src" type="video/mp4" src=""></source>
@@ -81,12 +86,21 @@
 		<div id="bookmarkInputDiv" style="display:none">
 			<div class="dialog-wrapper bottom-dialog">
 				Please enter comment for the bookmark (optional):<br />
-				<input type="text" class="roundInput" id="bookmarkComment"><br />
+				<input type="text" class="roundInput" id="bookmarkComment"><br/>
 				<table class="dialog-button-table"><tr><td>
 				<button id="bookmark-commit" class="dialog-button" onclick="bookmarkDialog.dialogReturned()">Bookmark</button>
 				</td><td>
 				<button class="dialog-button" onclick="bookmarkDialog.dialogCancelled()">Cancel</button>
 				</td></tr></table>
+			</div>
+		</div>
+		<div id="shareDialogDiv" style="display:none">
+			<div class="dialog-wrapper small-page-dialog">
+				<textarea id="link-text" value="text"></textarea>
+				<div class="share-btn-wrapper">
+					<button class="dialog-button share-copy-button" id="share-copy-button" onclick="shareDialog.copy()">Copy</button>
+					<button class="dialog-button share-close-button" id="share-close-button" onclick="shareDialog.dialogCancelled()">Close</button>
+				</div>
 			</div>
 		</div>
 		<div id="helpDialogDiv" style="display:none">
@@ -114,6 +128,21 @@
 				</td></tr></table>
 			</div>
 		</div>
+		<div class="metalabel-wrapper" id="ml-menu-wrapper" style="visibility:hidden;">
+			<div class="ml-btn-wrapper">
+				<button class="button-no-border ml-menu-btn" id="ml-menu-btn" title="Add to timeline">Bookmark<i class="material-icons large-icon" style="vertical-align: middle;">arrow_drop_down</i></button>
+				<div class="ml-dropdown-wrapper">
+					<p title="Add/Update to bookmarks" onclick="onAddBookmark()">Add/Update</p>
+					<p title="Remove from bookmarks" onclick="onRemoveBookmark()">Remove</p>
+				</div>
+			</div>
+		  <div class="ml-dir-prv-wrapper">
+				<button class="button-no-border ml-menu-btn" id="ml-prv-btn" title="Go to previous moment"><i class="material-icons large-icon" style="vertical-align: middle;">arrow_back</i></button>
+			</div>
+			<div class="ml-dir-next-wrapper">
+				<button class="button-no-border ml-menu-btn" id="ml-next-btn" title="Go to next moment"><i class="material-icons large-icon" style="vertical-align: middle;">arrow_forward</i></button>
+			</div>
+		</div>
 		<div class = "timeline-wrapper" id="timeline-wrapper" style="visibility: hidden;"></div>
 		<script src="https://code.jquery.com/jquery-3.3.1.js"
 		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -139,6 +168,7 @@
 		<script src="js/objects/spriteManager.js"></script>
 		<script src="js/objects/CameraManager.js"></script>
 		<script src="js/objects/UrlManager.js"></script>
+		<script src="js/objects/Timelines.js"></script>
 		<script src="js/objects/BookmarkManager.js"></script>
 		<script src="js/objects/Dialogs.js"></script>
 		<script src="js/objects/VideoManager.js"></script>
