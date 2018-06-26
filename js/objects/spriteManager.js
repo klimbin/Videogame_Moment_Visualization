@@ -1,6 +1,6 @@
 function SpriteManager() {
   var self = this;
-  this.anchor = new THREE.Vector2(0.5,0.3);
+  this.anchor = new THREE.Vector2(0.5,0.4);
   this.scene = null;
   this.spriteDictionary = {};
   this.spriteGroups = {}; //Sprites are grouped as corpus

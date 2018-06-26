@@ -49,13 +49,8 @@
 			<div class="top-btn-wrapper share-button-wrapper">
 				<button class="button-no-border" id="share-btn" title="Share" onclick="onShare()"><i class="my-icons material-icons" style="vertical-align: middle;" id="share-button">share</i></button>
 			</div>
-			<!--div class="question-container">
-					<div style="position: absolute; height: 100%; vertical-align: middle;">
-						<i class="far fa-question-circle" id="question-helper"></i>
-					</div>
-			</div-->
 		</div>
-		<div id="corpora_bar" style="display:none"></div>
+		<div class="vertical-bar" id="corpora_bar" style="display:none"></div>
 		<div id="video-div" class="dialog-wrapper half-page-dialog" style="display:none">
 			<div id="drag-icon-wrapper">
 				<i title="This is a draggable window." class="material-icons" id="video-drag-icon">drag_indicator</i>
@@ -129,18 +124,18 @@
 			</div>
 		</div>
 		<div class="metalabel-wrapper" id="ml-menu-wrapper" style="visibility:hidden;">
-			<div class="ml-btn-wrapper">
-				<button class="button-no-border ml-menu-btn" id="ml-menu-btn" title="Add to timeline">Bookmark<i class="material-icons large-icon" style="vertical-align: middle;">arrow_drop_down</i></button>
-				<div class="ml-dropdown-wrapper">
+			<div class="ml-content-wrapper ml-dir-prv-wrapper">
+				<button class="button-no-border" id="ml-prv-btn" title="Go to previous moment" onclick="onPreviousBtnClicked()"><i class="material-icons large-icon" style="vertical-align: middle;">arrow_left</i></button>
+			</div>
+			<div class="ml-content-wrapper ml-dropdown-btn-wrapper">
+				<button class="button-no-border" id="ml-dropdown-btn" title="Add to timeline" onclick="onShowLabelDropdown()">Global Id: 3300<!--i class="material-icons mid-icon" style="vertical-align: middle;">arrow_drop_down</i--></button>
+				<div class="ml-dropdown-wrapper" id="ml-dropdown-list">
 					<p title="Add/Update to bookmarks" onclick="onAddBookmark()">Add/Update</p>
 					<p title="Remove from bookmarks" onclick="onRemoveBookmark()">Remove</p>
 				</div>
 			</div>
-		  <div class="ml-dir-prv-wrapper">
-				<button class="button-no-border ml-menu-btn" id="ml-prv-btn" title="Go to previous moment"><i class="material-icons large-icon" style="vertical-align: middle;">arrow_back</i></button>
-			</div>
-			<div class="ml-dir-next-wrapper">
-				<button class="button-no-border ml-menu-btn" id="ml-next-btn" title="Go to next moment"><i class="material-icons large-icon" style="vertical-align: middle;">arrow_forward</i></button>
+			<div class="ml-content-wrapper ml-dir-next-wrapper">
+				<button class="button-no-border" id="ml-next-btn" title="Go to next moment" onclick="onNextBtnClicked()"><i class="material-icons large-icon" style="vertical-align: middle;">arrow_right</i></button>
 			</div>
 		</div>
 		<div class = "timeline-wrapper" id="timeline-wrapper" style="visibility: hidden;"></div>

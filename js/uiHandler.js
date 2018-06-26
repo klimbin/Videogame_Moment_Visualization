@@ -32,7 +32,7 @@ function addCorporaButtons(){
 }
 function onShowCorporaBar(id) {
   if (g_dialogVisible) { return; }
-
+  console.log("corporaBtn is clicked!");
   var isClicked = $('#' + id).hasClass("button-clicked");
   if (isClicked) {
     //document.getElementById("float_div").style.display = "none";
@@ -46,7 +46,7 @@ function onShowCorporaBar(id) {
 }
 function onShowBookmarkBar(id){
   if (g_dialogVisible) { return; }
-
+  console.log("Timeline is clicked!");
   var isBkmkBtnClicked = $('#' + id).hasClass("button-clicked");
   if (isBkmkBtnClicked) {
     $('#bookmark-btn').switchClass('button-clicked', 'button','fast');
@@ -80,6 +80,7 @@ function onShowCorpus(id){
   }
 }
 function onShowAnimationBar(id) {
+  console.log("Animation is clicked!");
   var isAnimationBtnClicked = $('#' + id).hasClass("button-clicked");
   if ( isAnimationBtnClicked ) {
     $('#' + id).switchClass('button-clicked', 'button','fast');
@@ -195,89 +196,30 @@ function addTimelineDivs(){
   css_class = 'timeline';
   text_class = 'timeline-text';
   timeline_number = Object.keys(spriteManager.spriteGroups).length;
-  if (timeline_number == 1) {
-    div_height_pct = 50;
-  } else {
-    div_height_pct = 100.0 /timeline_number;
-  }
+  div_height_pct = 100.0 /timeline_number;
   var idx = 0;
+  var order = 1;
   for (corpus in spriteManager.spriteGroups){
     var pct = idx * div_height_pct;
     var id = "timeline-" + corpus;
     var text_id = id + "-textbox";
     $('#timeline-wrapper').prepend("<div id='" + text_id + "', class='" + text_class + "'>" + corpus + "</div>");
-    $('#' + text_id).css("position", "absolute");
-    $('#' + text_id).css("bottom", pct+"%");
+    $('#' + text_id).css("position", "relative");
+    //$('#' + text_id).css("bottom", pct+"%");
     $('#' + text_id).css("height", div_height_pct+"%");
+    $('#' + text_id).css("order", order);
+    order ++;
 
     $('#timeline-wrapper').prepend("<div id='" + id + "', class='" + css_class + "'></div>");
-    $('#' + id).css("position", "absolute");
-    $('#' + id).css("bottom", pct+"%");
+    $('#' + id).css("position", "relative");
+    //$('#' + id).css("bottom", pct+"%");
     $('#' + id).css("height", div_height_pct+"%");
+    $('#' + id).css("order", order);
+    order ++;
+
     idx++ ;
   }
 }
-// var timelineData = {};
-// function createTimeline(){
-//   timeline_width = $( '.timeline-wrapper' ).width()* 0.9;
-//   for (corpus in spriteManager.spriteGroups) {
-//     if (!timelineData.hasOwnProperty(corpus)){
-//       var id = "#timeline-" + corpus;
-//       var elem = $(id);
-//       elem.html('');
-//       start = 0;
-//       stop = spriteManager.spriteGroups[corpus].children.length-1;
-//       start_spriteId = Number(spriteManager.spriteGroups[corpus].children[start].name);
-//       stop_spriteId = Number(spriteManager.spriteGroups[corpus].children[stop].name);
-//
-//       timelineData[corpus] = [{"value": start, "name": spriteManager.spriteDictionary[start_spriteId].game + " " + spriteManager.spriteDictionary[start_spriteId].corpus, img: spriteManager.spriteDictionary[start_spriteId].image, radius: "6", momentId: start_spriteId},
-//       {"value": stop, "name": spriteManager.spriteDictionary[stop_spriteId].game + " " + spriteManager.spriteDictionary[stop_spriteId].corpus, img: spriteManager.spriteDictionary[stop_spriteId].image, radius: "6", momentId: stop_spriteId}];
-//       TimeKnots.draw(id, timelineData[corpus], {dateDimension:false, color: "#5c5c8a", width:timeline_width, height: '50', showLabels: true, labelFormat: "%Y",lineWidth:2});
-//     }
-//   }
-// }
-//
-// function addTimeline(momentId, comments=null){
-//   timeline_width = $( '.timeline-wrapper' ).width()* 0.9;
-//   corpus = spriteManager.spriteDictionary[momentId].corpus;
-//   momentIndex = spriteManager.spriteDictionary[momentId].momentIndex;
-//   description = spriteManager.spriteDictionary[momentId].game + " " + spriteManager.spriteDictionary[momentId].corpus;
-//   if (momentIndex == 0 || momentIndex == (spriteManager.spriteGroups[corpus].children.length-1)) {
-//     for (var i =0; i < timelineData[corpus].length; i++){
-//       if (timelineData[corpus][i]["value"] == momentIndex) {
-//         timelineData[corpus][i]["comments"] = comments; //Only change comments
-//       }
-//     }
-//   } else {
-//     timelineData[corpus].push({"value": momentIndex, "name": description, "comments": comments, img: spriteManager.spriteDictionary[momentId].image,radius: "3", momentId: momentId});
-//   }
-//   for (corpus in spriteManager.spriteGroups) {
-//     var id = "#timeline-" + corpus;
-//     var elem = $(id);
-//     elem.html('');
-//     var timeline = TimeKnots.draw(id, timelineData[corpus], {dateDimension:false, color: "#5c5c8a", width:timeline_width, height: '50', showLabels: true, labelFormat: "%Y",lineWidth:2});
-//   }
-// }
-//
-// function deleteTimeline(selectedObject){
-// 	console.log("deleted");
-// 	var momentId = Number(selectedObject.name);
-//   var corpus = spriteManager.spriteDictionary[momentId].corpus;
-// 	var imglink = spriteManager.spriteDictionary[momentId].image;
-// 	timelineData[corpus] = timelineData[corpus].filter(function(object) {
-// 		return object.img !== imglink;
-// 	});
-//   // var elem = $('#timelineNonDate');
-//   // elem.html('');
-//   timeline_width = $( '.timeline-wrapper' ).width() * 0.9;
-//   for (corpus in spriteManager.spriteGroups) {
-//     var id = "#timeline-" + corpus;
-//     var elem = $(id);
-//     elem.html('');
-// 	  var timeline = TimeKnots.draw(id, timelineData[corpus], {dateDimension:false, color: "#5c5c8a", width:timeline_width, height: '50', showLabels: true, labelFormat: "%Y",lineWidth:2});
-//   }
-// }
-
 function onShowHelp() {
   g_dialogVisible = true;
   helpDialog.showDialog();
@@ -301,10 +243,11 @@ function onShare() {
 }
 
 function showFavoriteBtn() {
-  document.getElementById("ml-menu-wrapper").style.visibility = "visible";
+  $("#ml-menu-wrapper").css("visibility","visible");
+  $("#ml-dropdown-btn").text("Global Id: " + g_currentTarget);
 }
 function hideFavoriteBtn() {
-  document.getElementById("ml-menu-wrapper").style.visibility = "hidden";
+  $("#ml-menu-wrapper").css("visibility","hidden");
 }
 function onAddBookmark() {
   var objNameVal = Number(g_lastSelected.object.name);
@@ -323,4 +266,40 @@ function onAddBookmark() {
 function onRemoveBookmark() {
   var objNameVal = Number(g_lastSelected.object.name);
   bookmarkManager.removeBookmark(objNameVal);
+}
+function onNextBtnClicked(){
+  // should check if selected item is part of some object
+  if (g_lastSelected.object == null || (g_currentTarget >= Object.keys(spriteManager.spriteDictionary).length - 1)){
+    return;
+  }
+  g_autoRotate = false;
+  ////////////////////////////////////////////////////////////Chris's Code
+  audioManager.playSound(audioManager.soundOnNext); //sound for next page
+	//////////////////////////////////////////////////////////////////////
+  g_currentTarget += 1;
+  labelManager.showNearbyLabels(g_currentTarget, 5, false);
+  urlManager.updateURL(URLKeys.MOMENT, g_currentTarget);
+  g_lastSelected.object = spriteManager.spriteDictionary[g_currentTarget].object;
+  $("#ml-dropdown-btn").text("Global Id: " + g_currentTarget);
+}
+function onPreviousBtnClicked() {
+  if (g_lastSelected.object== null || (g_currentTarget == 0)){
+    return;
+  }
+  g_autoRotate = false;
+  ////////////////////////////////////////////////////////////Chris's Code
+  audioManager.playSound(audioManager.soundOnNext); //sound for next page
+  ////////////////////////////////////////////////////////////Chris's Code
+  g_currentTarget -= 1;
+  labelManager.showNearbyLabels(g_currentTarget, 5, false);
+  urlManager.updateURL(URLKeys.MOMENT, g_currentTarget);
+  g_lastSelected.object = spriteManager.spriteDictionary[g_currentTarget].object;
+  $("#ml-dropdown-btn").text("Global Id: " + g_currentTarget);
+}
+function onShowLabelDropdown() {
+  if ($("#ml-dropdown-list").css("display") == "none") {
+    $("#ml-dropdown-list").css("display","block");
+  } else {
+    $("#ml-dropdown-list").css("display","none");
+  }
 }

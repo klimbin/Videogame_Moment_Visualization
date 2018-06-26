@@ -43,10 +43,10 @@ function onMouseUp(event) {
   	if ( intersects.length > 0 )
   	{
       g_autoRotate = false;
+      var intersectedObj = intersects[0].object;
 	    ///////////////////////////////////////////////////Chris's Code
       audioManager.playSound(audioManager.soundOnClick); //Sound for Clicking
 	    ////////////////////////////////////////////////
-      var intersectedObj = intersects[0].object;
       labelManager.showNearbyLabels(Number(intersectedObj.name), ADJACENT_MOMENTS, true);
       urlManager.updateURL(URLKeys.MOMENT, g_currentTarget);
       g_lastSelected.object = spriteManager.spriteDictionary[g_currentTarget].object;
@@ -129,31 +129,33 @@ function onKeydown(event){
   if (g_dialogVisible) { return; }
   // should check if selected item is part of some object
   if (g_lastSelected.object != null && (event.key == '.' || event.key == '>')){
-    if (g_currentTarget >= Object.keys(spriteManager.spriteDictionary).length - 1)
-    {
-      return;
-    }
-    g_autoRotate = false;
-    ////////////////////////////////////////////////////////////Chris's Code
-    audioManager.playSound(audioManager.soundOnNext); //sound for next page
-  	//////////////////////////////////////////////////////////////////////
-    g_currentTarget += 1;
-    labelManager.showNearbyLabels(g_currentTarget, 5, false);
-    urlManager.updateURL(URLKeys.MOMENT, g_currentTarget);
-    g_lastSelected.object = spriteManager.spriteDictionary[g_currentTarget].object;
+    onNextBtnClicked();
+    // if (g_currentTarget >= Object.keys(spriteManager.spriteDictionary).length - 1)
+    // {
+    //   return;
+    // }
+    // g_autoRotate = false;
+    // ////////////////////////////////////////////////////////////Chris's Code
+    // audioManager.playSound(audioManager.soundOnNext); //sound for next page
+  	// //////////////////////////////////////////////////////////////////////
+    // g_currentTarget += 1;
+    // labelManager.showNearbyLabels(g_currentTarget, 5, false);
+    // urlManager.updateURL(URLKeys.MOMENT, g_currentTarget);
+    // g_lastSelected.object = spriteManager.spriteDictionary[g_currentTarget].object;
   } else if (g_lastSelected.object!= null && (event.key == ',' || event.key == '<')){
-    if (g_currentTarget == 0)
-    {
-      return;
-    }
-    g_autoRotate = false;
-    ////////////////////////////////////////////////////////////Chris's Code
-    audioManager.playSound(audioManager.soundOnNext); //sound for next page
-	  ////////////////////////////////////////////////////////////Chris's Code
-    g_currentTarget -= 1;
-    labelManager.showNearbyLabels(g_currentTarget, 5, false);
-    urlManager.updateURL(URLKeys.MOMENT, g_currentTarget);
-    g_lastSelected.object = spriteManager.spriteDictionary[g_currentTarget].object;
+    onPreviousBtnClicked();
+    // if (g_currentTarget == 0)
+    // {
+    //   return;
+    // }
+    // g_autoRotate = false;
+    // ////////////////////////////////////////////////////////////Chris's Code
+    // audioManager.playSound(audioManager.soundOnNext); //sound for next page
+	  // ////////////////////////////////////////////////////////////Chris's Code
+    // g_currentTarget -= 1;
+    // labelManager.showNearbyLabels(g_currentTarget, 5, false);
+    // urlManager.updateURL(URLKeys.MOMENT, g_currentTarget);
+    // g_lastSelected.object = spriteManager.spriteDictionary[g_currentTarget].object;
   }
 }
 function onKeyup(event){

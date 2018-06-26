@@ -11,7 +11,7 @@ var MetalabelManager = function() {
   this.wrapper_margin = 1.3; // this will affect all margins
   this.frame_top = this.canvas_height * 0.275; // 0.073;   // this tunes y / top margin
   this.frame_bottom = this.canvas_height * 0.925;
-  this.canvas_anchor = new THREE.Vector2(0.5,0.3);
+  this.canvas_anchor = new THREE.Vector2(0.5,0.4);
   this.metalabelDictionary = {};
 
   this.resize = function(size) {
