@@ -65,7 +65,7 @@ After we have the screenshots and embeddings in the right place, we can continue
   If the script is successfully executed, we should be able to find our new game or corpus in gameinfo.json (located in the root path). It will also generate a JSON file and a folder in the output dir that we set earlier in the script. Inside that folder, there should be a PNG, a bin file and a video. That's all we need.
 
 ## 5. Setup local server
-Now that the data is ready, we still need a local server to run this visualization on our computer. Note that SimpleHTTPServer and http.server don't support video streaming. So if you are using these servers, you won't be able to playback the video frame by frame. That is to say, most of our animation functions including playing between startId and stopId, jump back and jump forward will be invalid. However, other main functions should be all right.
+Now that the data is ready, we still need a local server to run this visualization on our computer. Here is a list of options you can choose. Note that SimpleHTTPServer and http.server don't support video streaming. So if you are using these servers, you won't be able to playback the video frame by frame. That is to say, most of our animation functions including playing between startId and stopId, jump back and jump forward will be invalid. However, other main functions should be alright.
 
 * Python 2 SimpleHTTPServer:<br>
   In terminal, cd to root path, type in  python -m SimpleHTTPServer 7777
@@ -76,4 +76,4 @@ Now that the data is ready, we still need a local server to run this visualizati
 Port 7777 is only a demo number, choose your own port number as long as it won't conflict with other applications.
 
 ## 6. On the main page
-After running the local server, you can access our main page at "localhost:7777". There are two buttons on that page. A toggle button for switching between 2D/3D according to what you generated earlier using the python script (you can generate both 2D/3D coordinates).  A dropdown button that allows you to choose a game to enter the space.
+After running the local server, you can access our main page at "localhost:7777". There are two buttons on that page. A toggle button for switching between 2D/3D according to what you generated earlier using the python script (you can generate both 2D/3D coordinates).  A dropdown button that allows you to choose a game to enter the space. 
