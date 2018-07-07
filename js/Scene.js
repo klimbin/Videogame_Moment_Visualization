@@ -155,21 +155,23 @@ function loadingScene() {
   }
 }
 function cameraReady() {
-  if (URLKeys.POSITION in urlParams) {
-    var positions = urlParams[URLKeys.POSITION];
-    if (positions.length == 3) {
-      camera.position.x = positions[0];
-      camera.position.y = positions[1];
-      camera.position.z = positions[2];
-    }
-  }
+
   if (URLKeys.MOMENT in urlParams && urlParams[URLKeys.MOMENT] != "null") {
     var inputMomentId = Number(urlParams[URLKeys.MOMENT]);
     labelManager.showNearbyLabels(inputMomentId, 1, true);
     urlManager.updateURL(URLKeys.MOMENT, inputMomentId);
     g_lastSelected.object = spriteManager.spriteDictionary[inputMomentId].object;
     g_autoRotate = false;
+  } else if (URLKeys.POSITION in urlParams) {
+    var positions = urlParams[URLKeys.POSITION];
+    if (positions.length == 3) {
+      camera.position.x = positions[0];
+      camera.position.y = positions[1];
+      camera.position.z = positions[2];
+      console.log( camera.position);
+    }
   }
+  
   if (URLKeys.BOOKMARK in urlParams && urlParams[URLKeys.BOOKMARK] != "null") {
     //console.log(urlParams[URLKeys.BOOKMARK]);
     var bmjson = JSON.parse(decodeURI(urlParams[URLKeys.BOOKMARK]));

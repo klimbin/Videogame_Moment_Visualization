@@ -40,7 +40,7 @@ var AudioManager = function () {
       //g_actionCounter += 1;
     });
     //g_expectedActions += 1;
-    this.audioLoader.load( 'sound/OnNext.mp3', function( buffer ) {
+    this.audioLoader.load( 'sound/OnNext.wav', function( buffer ) {
       self.soundOnNext.setBuffer( buffer );
       self.soundOnNext.setLoop( false );
       self.soundOnNext.setVolume( 0.3 );

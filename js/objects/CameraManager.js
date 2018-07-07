@@ -91,11 +91,12 @@ function CameraManager() {
     var flyFrom = null;
     //startingTime = performance.now();
     //Moving forward to the target object
-    var direction = raycaster.ray.direction.clone().normalize();
-    direction.multiplyScalar(FLY_STOP_DISTANCE);
-    targetPos = targetObj.position.clone();
-    targetPos.sub(direction) ;
-    flyTo =  targetPos;
+    // var direction = raycaster.ray.direction.clone().normalize();
+    // direction.multiplyScalar(FLY_STOP_DISTANCE);
+    // targetPos = targetObj.position.clone();
+    // targetPos.sub(direction) ;
+    // flyTo =  targetPos;
+    flyTo = this.targetCameraPosition;
     //var controlRange = spaceScale - target.length();
     flyFrom = camera.position;
     g_isFlying = true;
@@ -104,7 +105,7 @@ function CameraManager() {
     duration = FLYING_DURATION;
     // console.log('DEBUGGING: Flying Started - ' + (performance.now() - startingTime)); startingTime = performance.now();
     //reference to http://sole.github.io/tween.js/examples/03_graphs.html
-    var tween_rotate = new TWEEN.Tween(lookAtOrg, duration/2).to(lookAtDest).easing(TWEEN.Easing.Cubic.Out)
+    var tween_rotate = new TWEEN.Tween(lookAtOrg).to(lookAtDest,duration/2).easing(TWEEN.Easing.Linear.None)
       .onUpdate(function(){
         camera.lookAt(this.x, this.y, this.z);})
       .onComplete(function () {
@@ -135,6 +136,7 @@ function CameraManager() {
     //every time the camera or objects change position (or every frame)
     camera.updateMatrixWorld(); // make sure the camera matrix is updated
     camera.matrixWorldInverse.getInverse( camera.matrixWorld );
+    //matrixWorldInverse is the camera's orientation and position in world space V=M^-1
     this.cameraViewProjectionMatrix.multiplyMatrices( camera.projectionMatrix, camera.matrixWorldInverse );
     this.frustum.setFromMatrix( this.cameraViewProjectionMatrix );
   }

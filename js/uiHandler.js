@@ -161,7 +161,7 @@ function onPlay(id) {
         //pause animation
         videoManager.pause();
         videoManager.getCurrentMoment();
-        document.getElementById('moment-index-paused').innerHTML= "Global Id: " + videoManager.getCurrentMoment();
+        document.getElementById('moment-index-paused').innerHTML= "Global ID: " + videoManager.getCurrentMoment();
       }
       break;
     case "loop-reset-btn":
@@ -171,7 +171,7 @@ function onPlay(id) {
         //pause animation
         videoManager.pause();
         videoManager.getCurrentMoment();
-        document.getElementById('moment-index-paused').innerHTML= "Global Id: " + videoManager.getCurrentMoment();
+        document.getElementById('moment-index-paused').innerHTML= "Global ID: " + videoManager.getCurrentMoment();
       }
       break;
     case "replay-btn":
@@ -181,12 +181,12 @@ function onPlay(id) {
     case "fastfwd-btn":
       //videoManager.videoElement.currentTime += 1.0 / 24.0;
       videoManager.forward();
-      document.getElementById('moment-index-paused').innerHTML= "Global Id: " + videoManager.getCurrentMoment();
+      document.getElementById('moment-index-paused').innerHTML= "Global ID: " + videoManager.getCurrentMoment();
       break;
     case "fastrwd-btn":
       //videoManager.videoElement.currentTime -= 1.0 / 24.0;
       videoManager.rewind();
-      document.getElementById('moment-index-paused').innerHTML= "Global Id: " + videoManager.getCurrentMoment();
+      document.getElementById('moment-index-paused').innerHTML= "Global ID: " + videoManager.getCurrentMoment();
       break;
     // default:
   }
@@ -244,7 +244,7 @@ function onShare() {
 
 function showFavoriteBtn() {
   $("#ml-menu-wrapper").css("visibility","visible");
-  $("#ml-dropdown-btn").text("Global Id: " + g_currentTarget);
+  $("#ml-dropdown-btn").text("Global ID: " + g_currentTarget);
 }
 function hideFavoriteBtn() {
   $("#ml-menu-wrapper").css("visibility","hidden");
@@ -280,7 +280,7 @@ function onNextBtnClicked(){
   labelManager.showNearbyLabels(g_currentTarget, 5, false);
   urlManager.updateURL(URLKeys.MOMENT, g_currentTarget);
   g_lastSelected.object = spriteManager.spriteDictionary[g_currentTarget].object;
-  $("#ml-dropdown-btn").text("Global Id: " + g_currentTarget);
+  $("#ml-dropdown-btn").text("Global ID: " + g_currentTarget);
 }
 function onPreviousBtnClicked() {
   if (g_lastSelected.object== null || (g_currentTarget == 0)){
@@ -294,7 +294,7 @@ function onPreviousBtnClicked() {
   labelManager.showNearbyLabels(g_currentTarget, 5, false);
   urlManager.updateURL(URLKeys.MOMENT, g_currentTarget);
   g_lastSelected.object = spriteManager.spriteDictionary[g_currentTarget].object;
-  $("#ml-dropdown-btn").text("Global Id: " + g_currentTarget);
+  $("#ml-dropdown-btn").text("Global ID: " + g_currentTarget);
 }
 function onShowLabelDropdown() {
   if ($("#ml-dropdown-list").css("display") == "none") {
