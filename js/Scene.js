@@ -27,6 +27,7 @@ var helpDialog = new HelpDialog();
 var shareDialog = new ShareDialog();
 var videoManager = new VideoManager();
 var dataManager = new DataManager();
+var cameraControls = new CameraControls();
 ///////////////////Chris's variables////////////////////////////////////////////
 var moveFoward = false;
 var moveBackward = false;
@@ -124,19 +125,7 @@ function animate() {
     camera.rotation.x += AUTO_ROTATE_SPEED * 90 * Math.PI / 180;
     camera.rotation.z += AUTO_ROTATE_SPEED * 90 * Math.PI / 180;
   }
-
-  //////////////////////////Chris's code: Navigation////////////////////////////
-  var delta = (now - prevTime)/1000;
-  velocity.z -= velocity.z * 10.0 * delta;
-  direction.z = Number( moveFoward ) - Number (moveBackward);
-  direction.normalize();
-  if(moveFoward || moveBackward) velocity.z -= direction.z * 400.0 * delta;
-  camera.translateZ( velocity.z * delta );//for moving forward and backward
-  turning();
-  prevTime = now;
-  //set target
-  camera.updateProjectionMatrix();
-  //////////////////////////////////////////////////////////////////////////////
+  cameraControls.update();
 }
 function render() {
   renderer.render( scene, camera );
@@ -171,7 +160,6 @@ function cameraReady() {
       console.log( camera.position);
     }
   }
-  
   if (URLKeys.BOOKMARK in urlParams && urlParams[URLKeys.BOOKMARK] != "null") {
     //console.log(urlParams[URLKeys.BOOKMARK]);
     var bmjson = JSON.parse(decodeURI(urlParams[URLKeys.BOOKMARK]));
@@ -180,11 +168,3 @@ function cameraReady() {
     }
   }
 }
-
-//////////////////////////chris's new code
-function turning(){
-  var factor = clock.getDelta() * 0.25;
-  tmpQuaternion.set( rotationVector.x * factor, rotationVector.y * factor, rotationVector.z * factor, 1).normalize();
-  camera.quaternion.multiply( tmpQuaternion ); //for rotation vector
-}
-//////////////////////////////////////////////////

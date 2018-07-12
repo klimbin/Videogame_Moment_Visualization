@@ -211,32 +211,31 @@ function onReadBookmark(event) {
   }
 }
 
-//////////////////////////////////////////////Chris's code
 function myKeyDown(event){
   if (g_dialogVisible) { return; }
 
 	event = event || window.event;
 	switch(event.keyCode){
 		case 87:
-			moveFoward = true;
+			cameraControls.moveFoward = true;
 			break;
 		case 83:
-			moveBackward = true;
+			cameraControls.moveBackward = true;
 			break;
 		case 65:
-			turnLeft = 1;
+			cameraControls.turnLeft = 1;
 			break;
  		case 68:
-			turnRight = 1;
+			cameraControls.turnRight = 1;
 			break;
 		case 82:
-			turnUp = 1;
+			cameraControls.turnUp = 1;
 			break;
 		case 70:
-			turnDown = 1;
+			cameraControls.turnDown = 1;
 			break;
 	}
-	updateRotation();
+	cameraControls.updateRotation();
 };
 
 function myKeyUp (event){
@@ -245,32 +244,27 @@ function myKeyUp (event){
   event = event || window.event;
 		switch(event.keyCode){
 		case 87:
-			moveFoward = false;
+			cameraControls.moveFoward = false;
 			break;
 		case 83:
-			moveBackward = false;
+			cameraControls.moveBackward = false;
 			break;
 		case 65:
-			turnLeft = 0;
+			cameraControls.turnLeft = 0;
 			break;
  		case 68:
-			turnRight = 0;
+			cameraControls.turnRight = 0;
 			break;
 		case 82:
-			turnUp = 0;
+			cameraControls.turnUp = 0;
 			break;
 		case 70:
-			turnDown = 0;
+			cameraControls.turnDown = 0;
 			break;
 	}
-	updateRotation();
+	cameraControls.updateRotation();
 };
 
-function updateRotation(){
-	rotationVector.x = ( - turnDown + turnUp );
-	rotationVector.y = ( - turnRight + turnLeft );
-	//update the rotation's direction
-};
 function resizeTimeline(){
   bookmarkManager.timeLine.resizeTimeline();
 }

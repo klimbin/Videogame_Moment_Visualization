@@ -100,27 +100,47 @@
 		</div>
 		<div id="helpDialogDiv" style="display:none">
 			<div class="dialog-wrapper full-page-dialog">
-				<table class="dialog-button-table dialog-wide-table"><tr style="height:90%; text-align: left"><td>
-<h3>Navigation</h3>
-<ul>
-	<li>Mouse scroll to zoom in or zoom out</li>
-	<li>Mouse drag to rotate</li>
-	<li>Press key w, s to move forward or backward</li>
-	<li>Press key a, d to move the camera to the left or right</li>
-</ul>
-<h3>Controls</h3>
-<ul>
-	<li>Mouse click to select a moment, once selected:</li>
-		<ul>
-			<li>Press key , and . to jump to the previous or next moment</li>
-			<li>Press Key b to bookmark the current moment</li>
-		</ul>
-	<li>Press key - and = to jump to the previous or next bookmark</li>
-	<li>Use global ID to search for a specific moment</li>
-</ul>
-				</td></tr><tr><td>
-				<button class="dialog-button" onclick="helpDialog.dialogCancelled()">Close</button>
-				</td></tr></table>
+				<div class="full-page-div" style="overflow-y: scroll;">
+					<table class="dialog-button-table dialog-wide-table">
+						<tr style="height:90%; text-align: left;">
+							<td>
+								<h3>Navigation</h3>
+								<ul>
+									<li>Mouse scroll to zoom in or zoom out</li>
+									<li>Mouse drag to rotate</li>
+									<li>Press key w, s to move forward or backward</li>
+									<li>Press key a, d to move the camera to the left or right</li>
+									<li>Press key r, f to look up and down</li>
+								</ul>
+								<h3>Controls</h3>
+								<ul>
+									<li>Mouse click to select a moment, once selected:</li>
+										<ul>
+											<li>Press key , and . to jump to the previous or next moment</li>
+											<li>Press Key b to bookmark the current moment</li>
+										</ul>
+									<li>Press key - and = to jump to the previous or next bookmark</li>
+									<li>Use global ID to search for a specific moment</li>
+								</ul>
+								<h3>Menu</h3>
+								<ul>
+									<li>Corpora allows you to toggle on and off specific corpus rendered in the scene</li>
+									<li>Timeline shows your saved bookmarks on their respective timelines corresponding to the corpora</li>
+									<li>Animation puts all the screenshots in a single video clip</li>
+										<ul>
+											<li>Use StartId, StopId to set the start and end frame of the video using moment global Id</li>
+											<li>When the video is paused, you can use |< and |> to jump to the last and the next moment</li>
+											<li>Use rewind button to start over the video</li>
+											<li>Use X button to reset</li>
+										</ul>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="helper-btn-wrapper">
+					<button class="dialog-button" onclick="helpDialog.dialogCancelled()">Close</button>
+				</div>
 			</div>
 		</div>
 		<div class="metalabel-wrapper" id="ml-menu-wrapper" style="visibility:hidden;">
@@ -162,6 +182,7 @@
 		<script src="js/objects/MetalabelManager.js"></script>
 		<script src="js/objects/spriteManager.js"></script>
 		<script src="js/objects/CameraManager.js"></script>
+		<script src="js/objects/CameraControls.js"></script>
 		<script src="js/objects/UrlManager.js"></script>
 		<script src="js/objects/Timelines.js"></script>
 		<script src="js/objects/BookmarkManager.js"></script>
