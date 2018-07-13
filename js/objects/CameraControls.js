@@ -13,6 +13,9 @@ function CameraControls() {
   this.clock = new THREE.Clock();//variables for turning direction and moving speed
 }
 Object.assign( CameraControls.prototype, {
+  init: function() {
+    return;
+  },
   update: function() {
     //////////////////////////Chris's code: Navigation////////////////////////////
     // var delta = (now - prevTime)/1000;
@@ -58,5 +61,51 @@ Object.assign( CameraControls.prototype, {
     // };
     this.rotationVector.x = ( - this.turnDown + this.turnUp );
 	  this.rotationVector.y = ( - this.turnRight + this.turnLeft );
+  },
+  onKeydown: function(event) {
+    switch(event.keyCode){
+  		case 87:
+  			this.moveFoward = true;
+  			break;
+  		case 83:
+  			this.moveBackward = true;
+  			break;
+  		case 65:
+  			this.turnLeft = 1;
+  			break;
+   		case 68:
+  			this.turnRight = 1;
+  			break;
+  		case 82:
+  			this.turnUp = 1;
+  			break;
+  		case 70:
+  			this.turnDown = 1;
+  			break;
+  	}
+  	this.updateRotation();
+  },
+  onKeyup: function(event) {
+    switch(event.keyCode){
+  		case 87:
+  			this.moveFoward = false;
+  			break;
+  		case 83:
+  			this.moveBackward = false;
+  			break;
+  		case 65:
+  			this.turnLeft = 0;
+  			break;
+   		case 68:
+  			this.turnRight = 0;
+  			break;
+  		case 82:
+  			this.turnUp = 0;
+  			break;
+  		case 70:
+  			this.turnDown = 0;
+  			break;
+  	}
+  	this.updateRotation();
   }
 });

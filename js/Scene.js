@@ -81,6 +81,8 @@ function initScene() {
   controls.maxDistance = SPACE_SCALE * 0.8;
   controls.update();
 
+  cameraControls.init();
+
   skybox.addToScene(scene);
   spriteManager.addSprites(scene, spriteJSONPath);
 
@@ -157,7 +159,6 @@ function cameraReady() {
       camera.position.x = positions[0];
       camera.position.y = positions[1];
       camera.position.z = positions[2];
-      console.log( camera.position);
     }
   }
   if (URLKeys.BOOKMARK in urlParams && urlParams[URLKeys.BOOKMARK] != "null") {

@@ -215,54 +215,14 @@ function myKeyDown(event){
   if (g_dialogVisible) { return; }
 
 	event = event || window.event;
-	switch(event.keyCode){
-		case 87:
-			cameraControls.moveFoward = true;
-			break;
-		case 83:
-			cameraControls.moveBackward = true;
-			break;
-		case 65:
-			cameraControls.turnLeft = 1;
-			break;
- 		case 68:
-			cameraControls.turnRight = 1;
-			break;
-		case 82:
-			cameraControls.turnUp = 1;
-			break;
-		case 70:
-			cameraControls.turnDown = 1;
-			break;
-	}
-	cameraControls.updateRotation();
+  cameraControls.onKeydown(event);
 };
 
 function myKeyUp (event){
   if (g_dialogVisible) { return; }
 
   event = event || window.event;
-		switch(event.keyCode){
-		case 87:
-			cameraControls.moveFoward = false;
-			break;
-		case 83:
-			cameraControls.moveBackward = false;
-			break;
-		case 65:
-			cameraControls.turnLeft = 0;
-			break;
- 		case 68:
-			cameraControls.turnRight = 0;
-			break;
-		case 82:
-			cameraControls.turnUp = 0;
-			break;
-		case 70:
-			cameraControls.turnDown = 0;
-			break;
-	}
-	cameraControls.updateRotation();
+  cameraControls.onKeyup(event);
 };
 
 function resizeTimeline(){
